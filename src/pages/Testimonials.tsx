@@ -1,0 +1,378 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+import { Star, Quote, ArrowRight, Heart, Users, Award } from "lucide-react";
+
+const Testimonials = () => {
+  const allTestimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Marketing Executive",
+      location: "Seattle, WA",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Lifestyle Coaching",
+      text: "Aaron's holistic approach completely transformed my relationship with wellness. As a busy professional, I thought I didn't have time for self-care. He showed me how to integrate mindful practices into my daily routine without adding stress to my already packed schedule.",
+      highlight: "Lost 15 lbs and gained incredible energy",
+      date: "March 2024"
+    },
+    {
+      name: "Michael Chen",
+      role: "Software Developer",
+      location: "Portland, OR", 
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Pathfinder Retreat",
+      text: "The retreat experience was life-changing. Aaron creates such a safe, supportive environment where you can truly disconnect and focus on yourself. I left feeling renewed and with practical tools I still use daily. The combination of nature and mindful practices was perfect.",
+      highlight: "Discovered new levels of inner peace",
+      date: "February 2024"
+    },
+    {
+      name: "Lisa Martinez",
+      role: "Working Mother",
+      location: "Vancouver, WA",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Yoga & Breathwork",
+      text: "Aaron understands the challenges of balancing family life with personal wellness. His 'real-world' approach helped me find sustainable practices that work with my schedule, not against it. The breathwork techniques have been particularly transformative for managing stress.",
+      highlight: "Reduced anxiety by 80% in 6 months",
+      date: "January 2024"
+    },
+    {
+      name: "David Thompson",
+      role: "Corporate Manager",
+      location: "Bellevue, WA",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Corporate Wellness",
+      text: "The corporate wellness program Aaron designed for our team significantly improved morale and productivity. His ability to make wellness accessible and practical for everyone is remarkable. Our team now looks forward to wellness Wednesdays!",
+      highlight: "Team productivity increased by 25%",
+      date: "December 2023"
+    },
+    {
+      name: "Emma Williams",
+      role: "Teacher",
+      location: "Olympia, WA",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Mobility Training",
+      text: "I came to Aaron dealing with chronic stress and burnout from teaching. Through breathwork and mindful movement, I learned to manage stress proactively rather than reactively. The mobility training also helped with my chronic back pain from years of classroom work.",
+      highlight: "Eliminated chronic back pain",
+      date: "November 2023"
+    },
+    {
+      name: "Robert Kim",
+      role: "Startup Founder",
+      location: "Seattle, WA",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Lifestyle Coaching",
+      text: "Running a startup means constant stress and irregular schedules. Aaron helped me create wellness habits that actually fit into my chaotic life. His approach is practical, not preachy. I'm more focused, sleep better, and handle stress much more effectively.",
+      highlight: "Improved sleep quality by 90%",
+      date: "October 2023"
+    },
+    {
+      name: "Jennifer Lee",
+      role: "Nurse",
+      location: "Tacoma, WA",
+      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Stress Management",
+      text: "Working in healthcare during challenging times, I was completely burned out. Aaron's stress management techniques and mindfulness practices helped me rediscover my passion for helping others while taking better care of myself. I feel like myself again.",
+      highlight: "Rediscovered passion for work",
+      date: "September 2023"
+    },
+    {
+      name: "Mark Rodriguez",
+      role: "Construction Manager",
+      location: "Spokane, WA",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Mobility Training",
+      text: "My physically demanding job was taking a toll on my body. Aaron's mobility training not only helped prevent injuries but actually made me stronger and more flexible than I was in my twenties. The injury prevention techniques are now part of my daily routine.",
+      highlight: "Prevented recurring injuries",
+      date: "August 2023"
+    },
+    {
+      name: "Amanda Foster",
+      role: "Marketing Consultant",
+      location: "Bellingham, WA",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face",
+      rating: 5,
+      service: "Summer Retreat",
+      text: "The coastal retreat was exactly what I needed to reset and refocus. Aaron's guidance helped me connect with nature and myself in ways I hadn't experienced before. The group was amazing and we still support each other months later. Truly transformative.",
+      highlight: "Built lasting friendships and community",
+      date: "July 2023"
+    }
+  ];
+
+  const stats = [
+    {
+      number: "500+",
+      label: "Happy Clients",
+      description: "Transformed lives through holistic wellness"
+    },
+    {
+      number: "4.9",
+      label: "Average Rating",
+      description: "Based on 200+ verified reviews"
+    },
+    {
+      number: "95%",
+      label: "Would Recommend",
+      description: "Clients who refer friends and family"
+    },
+    {
+      number: "50+",
+      label: "Retreats Led",
+      description: "Life-changing experiences in nature"
+    }
+  ];
+
+  const serviceTestimonials = {
+    "Lifestyle Coaching": allTestimonials.filter(t => t.service === "Lifestyle Coaching"),
+    "Retreats": allTestimonials.filter(t => t.service.includes("Retreat")),
+    "Yoga & Breathwork": allTestimonials.filter(t => t.service === "Yoga & Breathwork"),
+    "Corporate Wellness": allTestimonials.filter(t => t.service === "Corporate Wellness")
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 bg-gradient-to-b from-muted/30 to-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge variant="secondary" className="mb-6">Client Stories</Badge>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+              Real Stories, Real{" "}
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Transformations
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in stagger-1">
+              Discover how people from all walks of life have transformed their health, 
+              reduced stress, and found sustainable wellness practices that actually work.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mb-20">
+            {stats.map((stat, index) => (
+              <div key={stat.label} className={`animate-fade-in stagger-${index + 1}`}>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.number}</div>
+                <div className="text-lg font-semibold mb-1">{stat.label}</div>
+                <div className="text-sm text-muted-foreground">{stat.description}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Testimonials Carousel */}
+      <TestimonialsCarousel />
+
+      {/* Detailed Testimonials by Service */}
+      <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6">Stories by Service</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              See how each service has helped clients achieve their specific wellness goals.
+            </p>
+          </div>
+
+          <div className="space-y-20">
+            {Object.entries(serviceTestimonials).map(([service, testimonials]) => (
+              <div key={service}>
+                <h3 className="text-3xl font-bold text-center mb-12">{service}</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {testimonials.map((testimonial, index) => (
+                    <Card key={`${service}-${testimonial.name}`} className={`shadow-card animate-fade-in stagger-${index + 1}`}>
+                      <CardContent className="p-6">
+                        {/* Header */}
+                        <div className="flex items-center space-x-4 mb-4">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-16 h-16 rounded-full object-cover"
+                          />
+                          <div className="flex-1">
+                            <h4 className="font-semibold">{testimonial.name}</h4>
+                            <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                            <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+                          </div>
+                        </div>
+
+                        {/* Rating */}
+                        <div className="flex items-center space-x-1 mb-4">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                          ))}
+                          <span className="text-sm text-muted-foreground ml-2">{testimonial.date}</span>
+                        </div>
+
+                        {/* Highlight */}
+                        <div className="mb-4">
+                          <Badge variant="secondary" className="bg-primary/10 text-primary text-xs">
+                            {testimonial.highlight}
+                          </Badge>
+                        </div>
+
+                        {/* Quote */}
+                        <blockquote className="text-muted-foreground italic">
+                          "{testimonial.text}"
+                        </blockquote>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Video Testimonials Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-6">Video Stories</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Hear directly from clients about their wellness journeys and transformations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah's Transformation",
+                thumbnail: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=400&h=300&fit=crop&crop=face",
+                duration: "3:24"
+              },
+              {
+                name: "Michael's Retreat Experience", 
+                thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face",
+                duration: "4:12"
+              },
+              {
+                name: "Corporate Team Success",
+                thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=300&fit=crop&crop=face",
+                duration: "2:45"
+              }
+            ].map((video, index) => (
+              <Card key={video.name} className={`overflow-hidden hover-lift cursor-pointer animate-fade-in stagger-${index + 1}`}>
+                <div className="relative">
+                  <img
+                    src={video.thumbnail}
+                    alt={video.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                      <div className="w-0 h-0 border-l-[12px] border-l-white border-y-[8px] border-y-transparent ml-1" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 right-4">
+                    <Badge variant="secondary" className="bg-white/90 text-foreground">
+                      {video.duration}
+                    </Badge>
+                  </div>
+                </div>
+                <CardContent className="p-4">
+                  <h4 className="font-semibold">{video.name}</h4>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Success Metrics */}
+      <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold mb-6">Client Success Metrics</h2>
+              <p className="text-xl text-muted-foreground">
+                Real results from real people who have committed to their wellness journey.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: Heart,
+                  metric: "85%",
+                  description: "Report significant stress reduction within 30 days"
+                },
+                {
+                  icon: Users,
+                  metric: "92%",
+                  description: "Continue practices 6 months after program completion"
+                },
+                {
+                  icon: Award,
+                  metric: "78%",
+                  description: "Achieve their primary wellness goals within 90 days"
+                }
+              ].map((metric, index) => {
+                const Icon = metric.icon;
+                return (
+                  <Card key={metric.metric} className={`text-center shadow-card animate-fade-in stagger-${index + 1}`}>
+                    <CardContent className="p-8">
+                      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Icon className="h-8 w-8 text-primary" />
+                      </div>
+                      <div className="text-4xl font-bold text-primary mb-2">{metric.metric}</div>
+                      <p className="text-muted-foreground">{metric.description}</p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-6">Ready to Write Your Own Success Story?</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Join hundreds of others who have transformed their wellness journey. 
+              Your story of transformation starts with a single step.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link to="/contact">
+                <Button size="lg" className="btn-hero group">
+                  Start Your Journey
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link to="/services">
+                <Button size="lg" variant="outline" className="btn-outline">
+                  Explore Services
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Testimonials;
