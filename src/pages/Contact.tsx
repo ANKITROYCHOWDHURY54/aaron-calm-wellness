@@ -371,7 +371,7 @@ const Contact = () => {
                   </blockquote>
                   <div className="flex items-center space-x-3">
                     <img
-                      src="https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=40&h=40&fit=crop&crop=face"
+                      src="https://randomuser.me/api/portraits/women/44.jpg"
                       alt="Sarah J."
                       className="w-10 h-10 rounded-full"
                     />

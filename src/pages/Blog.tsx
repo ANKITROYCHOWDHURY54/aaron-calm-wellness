@@ -1,5 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import image1 from "@/assets/featured-wellness-habits.jpg"
+import image2 from "@/assets/breathwork-guide.jpg"
+import image3 from "@/assets/desk-mobility.jpg"
+import image4 from "@/assets/mindful-eating.jpg"
+import image5 from "@/assets/morning-routine.jpg"
+import image6 from "@/assets/stress-management.jpg"
+import image7 from "@/assets/small-space-movement.jpg"
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,7 +45,7 @@ const Blog = () => {
     date: "March 10, 2024",
     readTime: "8 min read",
     category: "lifestyle",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68e71?w=800&h=400&fit=crop",
+    image: image1,
     featured: true
   };
 
@@ -51,7 +58,7 @@ const Blog = () => {
       date: "March 8, 2024",
       readTime: "6 min read",
       category: "mindfulness",
-      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=300&fit=crop"
+      image: image2
     },
     {
       id: "desk-mobility-routine",
@@ -61,7 +68,7 @@ const Blog = () => {
       date: "March 5, 2024",
       readTime: "4 min read",
       category: "movement",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=300&fit=crop"
+      image: image3
     },
     {
       id: "mindful-eating-principles",
@@ -71,7 +78,7 @@ const Blog = () => {
       date: "March 1, 2024",
       readTime: "7 min read",
       category: "nutrition",
-      image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=300&fit=crop"
+      image: image4
     },
     {
       id: "morning-routine-energy",
@@ -81,7 +88,7 @@ const Blog = () => {
       date: "February 28, 2024", 
       readTime: "5 min read",
       category: "lifestyle",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop"
+      image: image5
     },
     {
       id: "stress-management-techniques",
@@ -91,7 +98,7 @@ const Blog = () => {
       date: "February 25, 2024",
       readTime: "9 min read", 
       category: "mindfulness",
-      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68e71?w=600&h=300&fit=crop"
+      image: image6
     },
     {
       id: "movement-small-spaces",
@@ -101,7 +108,7 @@ const Blog = () => {
       date: "February 22, 2024",
       readTime: "6 min read",
       category: "movement", 
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=300&fit=crop"
+      image: image7
     }
   ];
 

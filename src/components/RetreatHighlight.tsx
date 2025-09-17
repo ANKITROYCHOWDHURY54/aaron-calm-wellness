@@ -7,20 +7,20 @@ import retreatBg from "@/assets/retreat-bg.jpg";
 
 const RetreatHighlight = () => {
   const featuredRetreat = {
-    title: "Pathfinder Wellness Retreat",
-    subtitle: "3-Day Forest Immersion Experience",
-    location: "Olympic Peninsula, Washington",
-    date: "March 15-17, 2024",
-    spots: "8 spots remaining",
-    price: "$495",
-    description: "Disconnect from the digital world and reconnect with yourself through mindful movement, breathwork, and nature immersion in the pristine Pacific Northwest wilderness.",
+    title: "Pathfinder Wellness Retreats",
+    subtitle: "Immersive 3–5 day experiences",
+    location: "Nature-forward venues",
+    date: "Multiple 2025 dates",
+    spots: "Limited availability",
+    price: "$1,200+",
+    description: "Immersive 3–5 day experiences designed for individuals and teams to recharge, reconnect, and reset in nature.",
     highlights: [
-      "Daily yoga & meditation sessions",
-      "Guided forest bathing experiences",
-      "Breathwork workshops",
+      "Daily yoga, breathwork, and meditation",
+      "Guided hikes and time in nature",
+      "Mindfulness and resilience workshops",
       "Healthy, locally-sourced meals",
-      "Digital detox environment",
-      "Small group setting (max 12 people)"
+      "Digital-light environment",
+      "Small group setting"
     ]
   };
 
@@ -39,14 +39,13 @@ const RetreatHighlight = () => {
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in stagger-1">
-            Step away from the everyday and into transformative experiences designed 
-            to restore, rejuvenate, and reconnect you with your truest self.
+            Step away from the noise and immerse yourself in nature. Our 3–5 day retreats are designed to restore balance, deepen connection, and create lasting change.
           </p>
         </div>
 
         {/* Featured Retreat */}
         <div className="max-w-6xl mx-auto">
-          <Card className="overflow-hidden shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 animate-fade-in stagger-2">
+          <Card className="overflow-hidden shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 animate-fade-in stagger-2 ring-1 ring-black/5">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Image */}
               <div className="relative h-64 lg:h-full min-h-[400px]">
@@ -72,7 +71,7 @@ const RetreatHighlight = () => {
 
                 {/* Price Badge */}
                 <div className="absolute bottom-6 left-6">
-                  <div className="px-4 py-2 rounded-full glass text-white font-semibold text-lg">
+                  <div className="px-4 py-2 rounded-full glass text-white font-semibold text-lg shadow-[0_6px_20px_rgba(0,0,0,0.25)]">
                     From {featuredRetreat.price}
                   </div>
                 </div>
@@ -126,8 +125,8 @@ const RetreatHighlight = () => {
                   {/* CTAs */}
                   <div className="flex flex-col sm:flex-row gap-4 pt-4">
                     <Link to="/retreats" className="flex-1">
-                      <Button size="lg" className="btn-hero w-full group">
-                        Reserve Your Spot
+                      <Button size="lg" className="btn-hero w-full group shadow-[0_8px_24px_rgba(0,0,0,0.2)]">
+                        Explore Retreats
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>

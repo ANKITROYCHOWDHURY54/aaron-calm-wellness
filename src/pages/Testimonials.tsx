@@ -9,105 +9,11 @@ import { Star, Quote, ArrowRight, Heart, Users, Award } from "lucide-react";
 
 const Testimonials = () => {
   const allTestimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "Marketing Executive",
-      location: "Seattle, WA",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Lifestyle Coaching",
-      text: "Aaron's holistic approach completely transformed my relationship with wellness. As a busy professional, I thought I didn't have time for self-care. He showed me how to integrate mindful practices into my daily routine without adding stress to my already packed schedule.",
-      highlight: "Lost 15 lbs and gained incredible energy",
-      date: "March 2024"
-    },
-    {
-      name: "Michael Chen",
-      role: "Software Developer",
-      location: "Portland, OR", 
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Pathfinder Retreat",
-      text: "The retreat experience was life-changing. Aaron creates such a safe, supportive environment where you can truly disconnect and focus on yourself. I left feeling renewed and with practical tools I still use daily. The combination of nature and mindful practices was perfect.",
-      highlight: "Discovered new levels of inner peace",
-      date: "February 2024"
-    },
-    {
-      name: "Lisa Martinez",
-      role: "Working Mother",
-      location: "Vancouver, WA",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Yoga & Breathwork",
-      text: "Aaron understands the challenges of balancing family life with personal wellness. His 'real-world' approach helped me find sustainable practices that work with my schedule, not against it. The breathwork techniques have been particularly transformative for managing stress.",
-      highlight: "Reduced anxiety by 80% in 6 months",
-      date: "January 2024"
-    },
-    {
-      name: "David Thompson",
-      role: "Corporate Manager",
-      location: "Bellevue, WA",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Corporate Wellness",
-      text: "The corporate wellness program Aaron designed for our team significantly improved morale and productivity. His ability to make wellness accessible and practical for everyone is remarkable. Our team now looks forward to wellness Wednesdays!",
-      highlight: "Team productivity increased by 25%",
-      date: "December 2023"
-    },
-    {
-      name: "Emma Williams",
-      role: "Teacher",
-      location: "Olympia, WA",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Mobility Training",
-      text: "I came to Aaron dealing with chronic stress and burnout from teaching. Through breathwork and mindful movement, I learned to manage stress proactively rather than reactively. The mobility training also helped with my chronic back pain from years of classroom work.",
-      highlight: "Eliminated chronic back pain",
-      date: "November 2023"
-    },
-    {
-      name: "Robert Kim",
-      role: "Startup Founder",
-      location: "Seattle, WA",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Lifestyle Coaching",
-      text: "Running a startup means constant stress and irregular schedules. Aaron helped me create wellness habits that actually fit into my chaotic life. His approach is practical, not preachy. I'm more focused, sleep better, and handle stress much more effectively.",
-      highlight: "Improved sleep quality by 90%",
-      date: "October 2023"
-    },
-    {
-      name: "Jennifer Lee",
-      role: "Nurse",
-      location: "Tacoma, WA",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Stress Management",
-      text: "Working in healthcare during challenging times, I was completely burned out. Aaron's stress management techniques and mindfulness practices helped me rediscover my passion for helping others while taking better care of myself. I feel like myself again.",
-      highlight: "Rediscovered passion for work",
-      date: "September 2023"
-    },
-    {
-      name: "Mark Rodriguez",
-      role: "Construction Manager",
-      location: "Spokane, WA",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Mobility Training",
-      text: "My physically demanding job was taking a toll on my body. Aaron's mobility training not only helped prevent injuries but actually made me stronger and more flexible than I was in my twenties. The injury prevention techniques are now part of my daily routine.",
-      highlight: "Prevented recurring injuries",
-      date: "August 2023"
-    },
-    {
-      name: "Amanda Foster",
-      role: "Marketing Consultant",
-      location: "Bellingham, WA",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face",
-      rating: 5,
-      service: "Summer Retreat",
-      text: "The coastal retreat was exactly what I needed to reset and refocus. Aaron's guidance helped me connect with nature and myself in ways I hadn't experienced before. The group was amazing and we still support each other months later. Truly transformative.",
-      highlight: "Built lasting friendships and community",
-      date: "July 2023"
-    }
+    { name: "Sarah L.", role: "", location: "", image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face", rating: 5, service: "", text: "Aaron’s coaching helped me recover from chronic back pain and finally feel at ease in my body again.", highlight: "", date: "" },
+    { name: "James K.", role: "", location: "", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face", rating: 5, service: "", text: "The retreat was life-changing — I left feeling recharged and clear about my priorities.", highlight: "", date: "" },
+    { name: "Priya M.", role: "", location: "", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face", rating: 5, service: "", text: "As a busy parent, Aaron’s practical approach to wellness made it possible for me to actually stick to a routine.", highlight: "", date: "" },
+    { name: "David R.", role: "", location: "", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face", rating: 5, service: "", text: "Our corporate retreat with Aaron transformed the way our team collaborates and communicates.", highlight: "", date: "" },
+    { name: "Emily T.", role: "", location: "", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face", rating: 5, service: "", text: "I’ve never felt so supported in my health journey. Aaron is the real deal.", highlight: "", date: "" }
   ];
 
   const stats = [

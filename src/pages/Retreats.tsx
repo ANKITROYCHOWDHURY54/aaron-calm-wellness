@@ -60,7 +60,7 @@ const Retreats = () => {
       location: "Cascade Mountains, WA",
       dates: "August 10-12, 2024",
       price: "$525",
-      image: "https://images.unsplash.com/photo-1464822759844-d150baec93c5?w=600&h=400&fit=crop",
+      image: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
       description: "High-altitude healing with breathwork and mountain meditation practices.",
       spots: "Early bird pricing"
     },

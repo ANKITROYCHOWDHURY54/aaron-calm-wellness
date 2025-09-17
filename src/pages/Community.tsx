@@ -151,17 +151,11 @@ const Community = () => {
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
             <Badge variant="secondary" className="mb-6 bg-white/20 text-white border-white/30">
-              Wellness Community
+              Community
             </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Join Our{" "}
-              <span className="text-accent-light">
-                Wellness Family
-              </span>
-            </h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">Join the Pathfinder Community</h1>
             <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8 animate-fade-in stagger-1">
-              Connect with like-minded individuals, share your journey, and grow together 
-              in a supportive environment designed to help you thrive.
+              Be part of a supportive wellness network. Access exclusive video courses, join daily challenges, and receive practical tips delivered to your inbox.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in stagger-2">
               <Button size="lg" className="bg-white text-primary hover:bg-white/90">

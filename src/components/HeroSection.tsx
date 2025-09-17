@@ -1,44 +1,36 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import natureVideo from "@/assets/nature.mp4";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax Effect */}
-      <div 
-        className="absolute inset-0 parallax-layer hero-gradient"
-        style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed"
-        }}
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src={natureVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
       />
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-accent/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-accent/60" />
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <div className="max-w-4xl mx-auto">
           {/* Main Headline */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in">
-            Calm, Empowering,{" "}
-            <span className="bg-gradient-to-r from-accent-light to-white bg-clip-text text-transparent">
-              Holistic Wellness
-            </span>
+            Calm, Empowering, Holistic Wellness for Real Life.
           </h1>
-          
-          <h2 className="text-2xl md:text-3xl text-white/90 mb-8 animate-fade-in stagger-1">
-            for Real Life
-          </h2>
-          
+
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in stagger-2">
-            Transform your relationship with wellness through mindful movement, 
-            breathwork, and sustainable lifestyle practices.
+          <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in stagger-2">
+            Helping busy professionals, parents, and teams build sustainable wellness habits
+            through yoga, mobility, breathwork, and lifestyle coaching.
           </p>
           
           {/* CTA Buttons */}
@@ -67,7 +59,7 @@ const HeroSection = () => {
             <p className="text-white/60 text-sm mb-4">Trusted by 500+ clients worldwide</p>
             <div className="flex justify-center items-center space-x-8 text-white/40">
               <div className="text-center">
-                <div className="text-2xl font-bold text-white">5+</div>
+                <div className="text-2xl font-bold text-white">10+</div>
                 <div className="text-sm">Years Experience</div>
               </div>
               <div className="w-px h-12 bg-white/30" />
@@ -86,11 +78,7 @@ const HeroSection = () => {
       </div>
       
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse" />
-        </div>
-      </div>
+      
     </section>
   );
 };

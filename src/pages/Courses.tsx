@@ -74,7 +74,7 @@ const Courses = () => {
       duration: "6 hours",
       lessons: 8,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68e71?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
       description: "Evidence-based strategies for managing stress and building mental resilience.",
       level: "Intermediate"
     }

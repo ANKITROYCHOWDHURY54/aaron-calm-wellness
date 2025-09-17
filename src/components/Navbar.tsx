@@ -27,23 +27,26 @@ const Navbar = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+  const isHome = location.pathname === "/";
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass shadow-card" : "bg-transparent"
+        isHome
+          ? (isScrolled ? "glass shadow-card" : "bg-black/50 backdrop-blur-md border-b border-white/10")
+          : "bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur border-b border-border shadow-sm"
       }`}
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+            <div className="p-2 rounded-full bg-primary/20 group-hover:bg-primary/30 transition-colors">
               <Leaf className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <h1 className="font-semibold text-lg text-foreground">Aaron S. Murray</h1>
-              <p className="text-sm text-muted-foreground">Holistic Health Coach</p>
+              <h1 className="font-semibold text-lg text-foreground drop-shadow-[0_1px_1px_rgba(0,0,0,0.85)]">Aaron S. Murray</h1>
+              <p className="text-sm text-muted-foreground drop-shadow-[0_1px_1px_rgba(0,0,0,0.85)]">Holistic Health Coach</p>
             </div>
           </Link>
 
@@ -55,7 +58,7 @@ const Navbar = () => {
                 to={link.href}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   isActive(link.href) ? "text-primary" : "text-foreground"
-                }`}
+                } drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]`}
               >
                 {link.label}
               </Link>

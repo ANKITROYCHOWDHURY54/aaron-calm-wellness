@@ -47,14 +47,10 @@ const About = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">About Aaron</Badge>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Meet{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                The Holistic Dad
-              </span>
+              I’m Aaron S. Murray
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in stagger-1">
-              A wellness coach who understands that the journey to health isn't about perfection—
-              it's about finding sustainable practices that honor both your goals and your humanity.
+              A Holistic Health & Mobility Coach, father, and lifelong learner. Over the past 10+ years, I’ve guided busy professionals, parents, and teams to build wellness practices that fit real life.
             </p>
           </div>
         </div>
@@ -97,37 +93,26 @@ const About = () => {
             {/* Content */}
             <div className="space-y-8 animate-fade-in stagger-2">
               <div>
-                <h2 className="text-3xl font-bold mb-6">My Story</h2>
+                <h2 className="text-3xl font-bold mb-6">Bio</h2>
                 <div className="space-y-6 text-lg leading-relaxed">
                   <p>
-                    My journey into holistic wellness began not in a yoga studio or retreat center, 
-                    but in the messy, beautiful reality of modern life. As a father trying to balance 
-                    career demands, family time, and personal health, I discovered that traditional 
-                    "all-or-nothing" approaches to wellness simply didn't work.
-                  </p>
-                  
-                  <p>
-                    What started as a personal quest for balance grew into a calling to help others 
-                    navigate the same challenges. I realized that sustainable wellness isn't about 
-                    perfect routines or extreme transformations—it's about finding practices that 
-                    actually fit into real life.
-                  </p>
-                  
-                  <p>
-                    Today, I combine years of training in yoga, breathwork, and movement therapy 
-                    with the practical wisdom that comes from being "in the trenches" of everyday 
-                    life. My approach honors both your aspirations and your reality.
+                    I’m Aaron S. Murray — a Holistic Health & Mobility Coach, father, and lifelong learner. Over the past 10+ years, I’ve guided busy professionals, parents, and teams to build wellness practices that fit real life.
                   </p>
                 </div>
               </div>
 
               {/* Philosophy */}
               <div>
-                <h3 className="text-2xl font-semibold mb-4">My Philosophy</h3>
+                <h3 className="text-2xl font-semibold mb-4">Story</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Wellness is not a destination—it's a dynamic, evolving practice of showing up 
-                  for yourself with compassion, curiosity, and consistency. Small, sustainable 
-                  changes create lasting transformation.
+                  My own journey into wellness began when I struggled with stress and recurring injuries. I discovered that sustainable habits, mobility, breathwork, and holistic coaching could completely shift not only my body, but my mindset and lifestyle. Today, I share that same path forward with others.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Mission</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  My mission is to help you move better, breathe deeper, and live with clarity — so you can thrive at work, at home, and within your community.
                 </p>
               </div>
             </div>

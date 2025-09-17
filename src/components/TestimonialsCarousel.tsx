@@ -5,12 +5,13 @@ import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 
 const TestimonialsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const testimonials = [
     {
       name: "Sarah Johnson",
       role: "Marketing Executive",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=150&h=150&fit=crop&crop=face",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
       rating: 5,
       text: "Aaron's holistic approach completely transformed my relationship with wellness. As a busy professional, I thought I didn't have time for self-care. He showed me how to integrate mindful practices into my daily routine.",
       highlight: "Completely transformed my relationship with wellness"
@@ -18,7 +19,7 @@ const TestimonialsCarousel = () => {
     {
       name: "Michael Chen",
       role: "Software Developer",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
       rating: 5,
       text: "The retreat experience was life-changing. Aaron creates such a safe, supportive environment where you can truly disconnect and focus on yourself. I left feeling renewed and with practical tools I still use daily.",
       highlight: "Life-changing retreat experience"
@@ -26,7 +27,7 @@ const TestimonialsCarousel = () => {
     {
       name: "Lisa Martinez",
       role: "Working Mother",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
       rating: 5,
       text: "Aaron understands the challenges of balancing family life with personal wellness. His 'real-world' approach helped me find sustainable practices that work with my schedule, not against it.",
       highlight: "Sustainable practices that actually work"
@@ -34,7 +35,7 @@ const TestimonialsCarousel = () => {
     {
       name: "David Thompson",
       role: "Corporate Manager",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      image: "https://randomuser.me/api/portraits/men/22.jpg",
       rating: 5,
       text: "The corporate wellness program Aaron designed for our team significantly improved morale and productivity. His ability to make wellness accessible and practical for everyone is remarkable.",
       highlight: "Significantly improved team morale and productivity"
@@ -42,7 +43,7 @@ const TestimonialsCarousel = () => {
     {
       name: "Emma Williams",
       role: "Teacher",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      image: "https://randomuser.me/api/portraits/women/95.jpg",
       rating: 5,
       text: "I came to Aaron dealing with chronic stress and burnout. Through breathwork and mindful movement, I learned to manage stress proactively rather than reactively. It's been transformative.",
       highlight: "Learned to manage stress proactively"
@@ -59,14 +60,19 @@ const TestimonialsCarousel = () => {
 
   // Auto-advance carousel
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(nextTestimonial, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/30">
+    <section
+      className="py-20 bg-gradient-to-b from-background to-muted/30"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16">
@@ -117,6 +123,9 @@ const TestimonialsCarousel = () => {
                   src={currentTestimonial.image}
                   alt={currentTestimonial.name}
                   className="w-16 h-16 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(currentTestimonial.name)}&background=random&color=fff&size=64`;
+                  }}
                 />
                 <div className="text-center">
                   <div className="font-semibold text-lg">{currentTestimonial.name}</div>
@@ -179,6 +188,9 @@ const TestimonialsCarousel = () => {
                 src={testimonial.image}
                 alt={testimonial.name}
                 className="w-12 h-12 rounded-full mx-auto mb-2 object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=random&color=fff&size=48`;
+                }}
               />
               <div className="text-xs font-medium text-center">
                 {testimonial.name.split(' ')[0]}

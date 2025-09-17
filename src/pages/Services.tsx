@@ -15,129 +15,109 @@ const Services = () => {
     {
       id: "yoga-breathwork",
       title: "Yoga & Breathwork",
-      subtitle: "Mind-Body Connection",
+      subtitle: "Daily practices to unlock energy and calm",
       image: yogaBreathworkImg,
       price: "From $85",
       duration: "60-90 min",
       groupSize: "1-12 people",
-      description: "Discover the transformative power of mindful movement and conscious breathing. These sessions blend traditional yoga practices with modern breathwork techniques to help you find balance, reduce stress, and connect deeply with your inner wisdom.",
+      description: "Calming and energizing practices that improve flexibility, focus, and emotional balance. Available as 1:1 coaching or group sessions.",
       benefits: [
         "Stress reduction and anxiety relief",
         "Improved flexibility and strength",
         "Enhanced mental clarity and focus",
-        "Better sleep and relaxation",
-        "Emotional regulation and balance",
-        "Spiritual connection and growth"
+        "Better sleep and relaxation"
       ],
       includes: [
         "Personalized practice assessment",
         "Guided movement sequences",
         "Breathwork techniques",
-        "Meditation and mindfulness",
-        "Home practice recommendations",
-        "Progress tracking and adjustments"
+        "Meditation and mindfulness"
       ],
       formats: [
         "Private 1-on-1 Sessions",
         "Small Group Classes (2-6 people)",
-        "Workshop Series (4-week programs)",
-        "Retreat Integration Sessions"
+        "Workshop Series (4-week programs)"
       ]
     },
     {
       id: "mobility-movement",
-      title: "Mobility & Movement",
-      subtitle: "Injury Prevention & Recovery",
+      title: "Mobility & Injury Prevention",
+      subtitle: "Restore movement and reduce pain",
       image: mobilityTrainingImg,
       price: "From $95",
       duration: "45-75 min",
       groupSize: "1-8 people",
-      description: "Restore your body's natural movement patterns and prevent future injuries through functional mobility training. Perfect for athletes, desk workers, and anyone looking to move with more ease and confidence in daily life.",
+      description: "Restore your range of motion, prevent injuries, and reduce pain through simple, science-backed mobility routines.",
       benefits: [
         "Pain reduction and prevention",
         "Improved posture and alignment",
-        "Enhanced athletic performance",
         "Increased range of motion",
-        "Better balance and coordination",
-        "Functional strength development"
+        "Better balance and coordination"
       ],
       includes: [
         "Movement assessment and analysis",
         "Personalized mobility program",
         "Corrective exercise techniques",
-        "Pain management strategies",
-        "Equipment recommendations",
         "Progress monitoring and adjustments"
       ],
       formats: [
         "Private Assessment & Training",
         "Semi-Private Sessions (2-4 people)",
-        "Workplace Ergonomic Consultations",
-        "Athletic Performance Programs"
+        "Workplace Ergonomic Consultations"
       ]
     },
     {
       id: "lifestyle-coaching",
       title: "Lifestyle Coaching",
-      subtitle: "Holistic Wellness Guidance",
+      subtitle: "Sustainable habits for a balanced life",
       image: lifestyleCoachingImg,
       price: "From $125",
       duration: "60-90 min",
       groupSize: "1-on-1",
-      description: "Create sustainable health habits that align with your values and lifestyle. This comprehensive approach addresses nutrition, sleep, stress management, and lifestyle design to help you thrive in all areas of life.",
+      description: "Practical coaching that helps you create sustainable wellness habits in nutrition, sleep, stress management, and daily routines.",
       benefits: [
         "Sustainable habit formation",
         "Improved energy and vitality",
         "Better work-life balance",
-        "Enhanced mental resilience",
-        "Optimized nutrition and sleep",
-        "Increased life satisfaction"
+        "Enhanced mental resilience"
       ],
       includes: [
         "Comprehensive wellness assessment",
         "Personalized action plans",
-        "Nutrition guidance and meal planning",
         "Sleep optimization strategies",
-        "Stress management techniques",
-        "Ongoing support and accountability"
+        "Stress management techniques"
       ],
       formats: [
         "Individual Coaching Sessions",
         "3-Month Transformation Programs",
-        "6-Month Lifestyle Redesign",
         "Maintenance & Support Packages"
       ]
     },
     {
       id: "corporate-wellness",
       title: "Corporate Wellness",
-      subtitle: "Team Health & Productivity",
+      subtitle: "Team-focused retreats and workshops",
       image: corporateWellnessImg,
       price: "Custom Pricing",
       duration: "30min-Full Day",
       groupSize: "5-50+ people",
-      description: "Bring wellness to your workplace with customized programs designed to reduce stress, improve team dynamics, and boost productivity. From lunch-and-learn sessions to comprehensive wellness initiatives.",
+      description: "Workshops and retreats designed to recharge leaders and teams, improving productivity, resilience, and workplace culture.",
       benefits: [
         "Reduced employee stress and burnout",
         "Improved team morale and collaboration",
         "Increased productivity and focus",
-        "Lower healthcare costs",
-        "Enhanced company culture",
-        "Better work-life integration"
+        "Enhanced company culture"
       ],
       includes: [
         "Workplace wellness assessment",
         "Customized program design",
         "On-site workshops and sessions",
-        "Digital resources and materials",
-        "Progress tracking and reporting",
-        "Ongoing program support"
+        "Progress tracking and reporting"
       ],
       formats: [
         "Lunch & Learn Sessions",
         "Half-Day Wellness Workshops",
-        "Team Building Retreats",
-        "Ongoing Wellness Programs"
+        "Team Building Retreats"
       ]
     }
   ];
@@ -151,16 +131,9 @@ const Services = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge variant="secondary" className="mb-6">Services</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Transform Your{" "}
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Wellness Journey
-              </span>
-            </h1>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">Services</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in stagger-1">
-              Discover personalized approaches to health and wellness that work for your lifestyle, 
-              goals, and unique needs. Each service is designed to meet you where you are and 
-              support your growth.
+              Yoga & Breathwork, Mobility & Injury Prevention, Lifestyle Coaching, and Corporate Wellness.
             </p>
           </div>
         </div>

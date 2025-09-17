@@ -10,7 +10,7 @@ const AboutPreview = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Image */}
           <div className="relative">
-            <div className="relative overflow-hidden rounded-2xl shadow-floating group">
+            <div className="relative overflow-hidden rounded-2xl shadow-floating group ring-1 ring-white/10">
               <img
                 src={aaronPortrait}
                 alt="Aaron S. Murray - Holistic Health Coach"
@@ -21,14 +21,14 @@ const AboutPreview = () => {
             
             {/* Floating Stats */}
             <div className="absolute -bottom-6 -right-6 grid grid-cols-2 gap-4">
-              <div className="bg-white rounded-xl p-4 shadow-card text-center">
+              <div className="bg-white/95 backdrop-blur rounded-xl p-4 shadow-card text-center border border-border">
                 <Heart className="h-6 w-6 text-primary mx-auto mb-2" />
                 <div className="text-2xl font-bold text-primary">500+</div>
                 <div className="text-sm text-muted-foreground">Happy Clients</div>
               </div>
-              <div className="bg-white rounded-xl p-4 shadow-card text-center">
+              <div className="bg-white/95 backdrop-blur rounded-xl p-4 shadow-card text-center border border-border">
                 <Award className="h-6 w-6 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-primary">5+</div>
+                <div className="text-2xl font-bold text-primary">10+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
             </div>
@@ -38,29 +38,20 @@ const AboutPreview = () => {
           <div className="space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">
-                Meet{" "}
-                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  The Holistic Dad
-                </span>
+                With over a decade of experience
               </h2>
               <p className="text-xl text-muted-foreground mb-6 animate-fade-in stagger-1">
-                Aaron S. Murray combines years of wellness expertise with the real-world 
-                perspective of modern parenthood and busy life.
+                I help people restore balance in body, mind, and lifestyle. As a coach and
+                a dad, I share practical tools for real-life wellness.
               </p>
             </div>
 
             <div className="space-y-6 animate-fade-in stagger-2">
               <p className="text-lg leading-relaxed text-foreground">
-                As a father, wellness coach, and lifelong learner, I understand the challenges 
-                of maintaining health and balance in our fast-paced world. My approach isn't 
-                about perfection—it's about finding sustainable practices that actually work 
+                As a father, wellness coach, and lifelong learner, I understand the challenges
+                of maintaining health and balance in our fast-paced world. My approach isn't
+                about perfection—it's about finding sustainable practices that actually work
                 for real life.
-              </p>
-              
-              <p className="text-lg leading-relaxed text-foreground">
-                Through personalized coaching, transformative retreats, and practical guidance, 
-                I help people discover their own path to holistic wellness—one that honors both 
-                their goals and their humanity.
               </p>
             </div>
 
@@ -93,8 +84,8 @@ const AboutPreview = () => {
 
             <div className="animate-fade-in stagger-4">
               <Link to="/about">
-                <Button size="lg" className="btn-outline group">
-                  Learn More About Aaron
+                <Button size="lg" className="btn-outline group shadow-[0_6px_20px_rgba(0,0,0,0.15)]">
+                  Learn More About Me
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
