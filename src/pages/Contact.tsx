@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import { useInView } from "@/hooks/useInView";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Phone, 
@@ -108,34 +109,37 @@ const Contact = () => {
     "Other"
   ];
 
+  const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pt-12 md:pt-16 pb-16 md:pb-20 relative overflow-hidden min-h-[60vh] md:min-h-[60vh] text-white">
         <div 
-          className="absolute inset-0"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url(${contactBg})`,
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-accent/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/50 to-accent/60" />
         
         <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <Badge variant="secondary" className="mb-6 bg-white/20 text-white border-white/30">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Get in Touch
             </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Let's Start Your{" "}
               <span className="text-accent-light">
                 Wellness Journey
               </span>
             </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto animate-fade-in stagger-1">
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-white/70 transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Ready to transform your health and well-being? I'm here to support you 
               every step of the way. Reach out and let's discuss how we can work together.
             </p>
@@ -144,15 +148,15 @@ const Contact = () => {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
+      <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20">
             {contactMethods.map((method, index) => {
               const Icon = method.icon;
               return (
-                <Card key={method.title} className={`text-center hover-lift animate-fade-in stagger-${index + 1}`}>
+                <Card key={method.title} className={`text-center transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg ring-1 ring-border/50`} style={{ transitionDelay: inView ? `${80 + index * 80}ms` : undefined }}>
                   <CardContent className="p-6">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center ring-1 ring-primary/20 transition-transform duration-300 hover:scale-110">
                       <Icon className="h-8 w-8 text-primary" />
                     </div>
                     <h3 className="text-xl font-semibold mb-2">{method.title}</h3>
@@ -176,23 +180,24 @@ const Contact = () => {
       </section>
 
       {/* Contact Form */}
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
             {/* Form */}
-            <div className="animate-fade-in">
-              <div className="mb-8">
-                <h2 className="text-4xl font-bold mb-4">Send a Message</h2>
-                <p className="text-lg text-muted-foreground">
+            <div className={`transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div className="mb-6 sm:mb-8">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Send a Message</h2>
+                <p className="text-base sm:text-lg text-muted-foreground">
                   Fill out the form below and I'll get back to you within 24 hours. 
                   The more details you share, the better I can tailor my response to your needs.
                 </p>
               </div>
 
-              <Card className="shadow-card">
-                <CardContent className="p-8">
+              <Card className="shadow-card ring-1 ring-border/50 overflow-hidden">
+                <CardContent className="relative p-6 sm:p-8">
+                  <div className="pointer-events-none absolute inset-x-0 -top-1 h-16 bg-gradient-to-b from-white/30 to-transparent opacity-70" />
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium mb-2">
                           Full Name *
@@ -205,7 +210,7 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="Your full name"
-                          className="h-12"
+                          className="h-12 focus-visible:ring-2 focus-visible:ring-primary/40"
                         />
                       </div>
                       <div>
@@ -220,12 +225,12 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="your@email.com"
-                          className="h-12"
+                          className="h-12 focus-visible:ring-2 focus-visible:ring-primary/40"
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium mb-2">
                           Phone Number
@@ -237,7 +242,7 @@ const Contact = () => {
                           value={formData.phone}
                           onChange={handleChange}
                           placeholder="(555) 123-4567"
-                          className="h-12"
+                          className="h-12 focus-visible:ring-2 focus-visible:ring-primary/40"
                         />
                       </div>
                       <div>
@@ -249,7 +254,7 @@ const Contact = () => {
                           name="service"
                           value={formData.service}
                           onChange={handleChange}
-                          className="w-full h-12 px-3 rounded-md border border-input bg-background text-sm"
+                          className="w-full h-12 px-3 rounded-md border border-input bg-background text-sm focus-visible:ring-2 focus-visible:ring-primary/40"
                         >
                           <option value="">Select a service</option>
                           {services.map((service) => (
@@ -270,14 +275,14 @@ const Contact = () => {
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Tell me about your wellness goals, current challenges, or any questions you have..."
-                        className="min-h-[120px]"
+                        className="min-h-[120px] focus-visible:ring-2 focus-visible:ring-primary/40"
                       />
                     </div>
 
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full btn-hero"
+                      className="w-full btn-hero relative overflow-hidden group"
                       disabled={isLoading}
                     >
                       {isLoading ? (
@@ -286,11 +291,12 @@ const Contact = () => {
                           Sending Message...
                         </div>
                       ) : (
-                        <div className="flex items-center">
+                        <div className="flex items-center relative z-10">
                           Send Message
                           <Send className="ml-2 h-5 w-5" />
                         </div>
                       )}
+                      <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                     </Button>
                   </form>
                 </CardContent>
@@ -298,28 +304,32 @@ const Contact = () => {
             </div>
 
             {/* Info Sidebar */}
-            <div className="space-y-8 animate-fade-in stagger-2">
+            <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               {/* Quick Actions */}
-              <Card className="shadow-card">
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-semibold mb-6">Quick Actions</h3>
+              <Card className="shadow-card ring-1 ring-border/50 transition-all duration-500 hover:shadow-lg">
+                <CardContent className="relative p-6">
+                  <div className="pointer-events-none absolute inset-x-0 -top-1 h-12 bg-gradient-to-b from-white/30 to-transparent opacity-70" />
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Quick Actions</h3>
                   <div className="space-y-4">
-                    <Button className="w-full btn-hero justify-start" asChild>
+                    <Button className="w-full btn-hero justify-start relative overflow-hidden group" asChild>
                       <a href="mailto:hello@aaronmurray.com">
                         <Mail className="mr-3 h-5 w-5" />
                         Send Email Directly
+                        <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                       </a>
                     </Button>
-                    <Button variant="outline" className="w-full btn-outline justify-start" asChild>
+                    <Button variant="outline" className="w-full btn-outline justify-start relative overflow-hidden hover:border-primary/40" asChild>
                       <a href="tel:+15551234567">
                         <Phone className="mr-3 h-5 w-5" />
                         Call or Text
+                        <span className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                       </a>
                     </Button>
-                    <Button variant="outline" className="w-full btn-outline justify-start" asChild>
+                    <Button variant="outline" className="w-full btn-outline justify-start relative overflow-hidden hover:border-primary/40" asChild>
                       <a href="/retreats">
                         <Calendar className="mr-3 h-5 w-5" />
                         Book a Retreat
+                        <span className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                       </a>
                     </Button>
                   </div>
@@ -327,9 +337,10 @@ const Contact = () => {
               </Card>
 
               {/* FAQ */}
-              <Card className="shadow-card">
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-semibold mb-6">Frequently Asked</h3>
+              <Card className="shadow-card ring-1 ring-border/50 transition-all duration-500 hover:shadow-lg">
+                <CardContent className="relative p-6">
+                  <div className="pointer-events-none absolute inset-x-0 -top-1 h-12 bg-gradient-to-b from-white/30 to-transparent opacity-70" />
+                  <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Frequently Asked</h3>
                   <div className="space-y-6">
                     <div>
                       <h4 className="font-semibold mb-2 flex items-center">
@@ -363,8 +374,9 @@ const Contact = () => {
               </Card>
 
               {/* Testimonial */}
-              <Card className="shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
-                <CardContent className="p-6">
+              <Card className="shadow-card bg-gradient-to-br from-primary/5 to-accent/5 ring-1 ring-border/50">
+                <CardContent className="relative p-6">
+                  <div className="pointer-events-none absolute inset-x-0 -top-1 h-12 bg-gradient-to-b from-white/30 to-transparent opacity-70" />
                   <blockquote className="text-lg italic mb-4">
                     "Aaron's compassionate approach made it easy to open up about my wellness goals. 
                     He truly listens and creates personalized solutions."
@@ -373,7 +385,7 @@ const Contact = () => {
                     <img
                       src="https://randomuser.me/api/portraits/women/44.jpg"
                       alt="Sarah J."
-                      className="w-10 h-10 rounded-full"
+                      className="w-10 h-10 rounded-full ring-2 ring-white/60"
                     />
                     <div>
                       <div className="font-semibold">Sarah J.</div>

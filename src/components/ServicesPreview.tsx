@@ -103,7 +103,7 @@ const ServicesPreview = () => {
             Holistic Wellness Services
           </Badge>
           
-          <h2 className={`text-4xl md:text-6xl font-bold mb-6 transition-all duration-1000 ${
+          <h2 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-6 mx-auto max-w-[22ch] transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             Transform Your{" "}

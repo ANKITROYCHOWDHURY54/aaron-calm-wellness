@@ -17,6 +17,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import onlineCoursesImg from "@/assets/online-courses.jpg";
+import { useInView } from "@/hooks/useInView";
 
 const Courses = () => {
   const featuredCourse = {
@@ -107,22 +108,36 @@ const Courses = () => {
     }
   ];
 
+  const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-muted/30 to-background">
+      <section className="relative pt-12 md:pt-16 pb-16 md:pb-20 overflow-hidden min-h-[60vh] md:min-h-[60vh] text-white">
+        <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl opacity-50" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl opacity-60" />
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${onlineCoursesImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-background" />
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6">Online Learning</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+          <div className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Online Learning</Badge>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Wellness{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Courses & Guides
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in stagger-1">
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Learn at your own pace with comprehensive courses and practical guides 
               designed to support your wellness journey wherever you are.
             </p>
@@ -131,13 +146,14 @@ const Courses = () => {
       </section>
 
       {/* Featured Course */}
-      <section className="py-20">
+      <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <Card className="overflow-hidden shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 animate-fade-in">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] animate-fade-in">
+              <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image */}
-                <div className="relative h-64 lg:h-full min-h-[500px]">
+                <div className="relative h-56 sm:h-64 lg:h-full lg:min-h-[500px]">
                   <img
                     src={featuredCourse.image}
                     alt={featuredCourse.title}
@@ -147,14 +163,14 @@ const Courses = () => {
                   
                   {/* Badge */}
                   <div className="absolute top-6 left-6">
-                    <Badge variant="secondary" className="bg-white/90 text-foreground">
+                    <Badge variant="secondary" className="bg-white/90 text-foreground ring-1 ring-border/50">
                       Most Popular
                     </Badge>
                   </div>
 
                   {/* Price */}
                   <div className="absolute bottom-6 left-6">
-                    <div className="glass text-white p-4 rounded-xl">
+                    <div className="glass text-white p-4 rounded-xl ring-1 ring-white/30">
                       <div className="text-2xl font-bold">{featuredCourse.price}</div>
                       <div className="text-sm line-through opacity-75">{featuredCourse.originalPrice}</div>
                     </div>
@@ -162,45 +178,46 @@ const Courses = () => {
 
                   {/* Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
+                    <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:scale-110 transition-transform ring-1 ring-white/40">
                       <Play className="h-8 w-8 text-white ml-1" />
                     </div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
+                  <CardContent className="relative p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+                    <div className="pointer-events-none absolute inset-x-0 -top-1 h-20 bg-gradient-to-b from-white/25 to-transparent opacity-70" />
                   <div className="space-y-6">
                     {/* Header */}
                     <div>
-                      <h2 className="text-3xl md:text-4xl font-bold mb-2">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
                         {featuredCourse.title}
                       </h2>
-                      <p className="text-xl text-primary font-medium mb-4">
+                      <p className="text-lg sm:text-xl text-primary font-medium mb-4">
                         {featuredCourse.subtitle}
                       </p>
-                      <p className="text-lg text-muted-foreground leading-relaxed">
+                      <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                         {featuredCourse.description}
                       </p>
                     </div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                       <div className="flex items-center space-x-2">
                         <Clock className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">{featuredCourse.duration}</span>
+                        <span className="text-xs sm:text-sm font-medium">{featuredCourse.duration}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <BookOpen className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">{featuredCourse.lessons} lessons</span>
+                        <span className="text-xs sm:text-sm font-medium">{featuredCourse.lessons} lessons</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                        <span className="text-sm font-medium">{featuredCourse.rating} ({featuredCourse.students} students)</span>
+                        <span className="text-xs sm:text-sm font-medium">{featuredCourse.rating} ({featuredCourse.students} students)</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Users className="h-5 w-5 text-primary" />
-                        <span className="text-sm font-medium">Lifetime access</span>
+                        <span className="text-xs sm:text-sm font-medium">Lifetime access</span>
                       </div>
                     </div>
 
@@ -218,19 +235,22 @@ const Courses = () => {
                     </div>
 
                     {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                      <Button size="lg" className="btn-hero flex-1 group">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
+                      <Button size="lg" className="btn-hero w-full sm:flex-1 group relative overflow-hidden">
                         Enroll Now
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                       </Button>
-                      <Button size="lg" variant="outline" className="btn-outline">
+                      <Button size="lg" variant="outline" className="btn-outline w-full sm:w-auto relative overflow-hidden hover:border-primary/40">
                         Preview Course
+                        <span className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                       </Button>
                     </div>
                   </div>
-                </CardContent>
-              </div>
-            </Card>
+                  </CardContent>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -247,16 +267,16 @@ const Courses = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {courses.map((course, index) => (
-              <Card key={course.id} className={`overflow-hidden hover-lift animate-fade-in stagger-${index + 1}`}>
+              <Card key={course.id} className={`group overflow-hidden transition-all duration-700 ease-out ${true ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl ring-1 ring-border/50`}>
                 <div className="relative h-48">
                   <img
                     src={course.image}
                     alt={course.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <Badge variant="secondary" className="bg-white/90 text-foreground text-xs">
+                    <Badge variant="secondary" className="bg-white/90 text-foreground text-xs ring-1 ring-border/50">
                       {course.type}
                     </Badge>
                   </div>
@@ -264,14 +284,14 @@ const Courses = () => {
                     <div className="text-white font-bold text-lg">{course.price}</div>
                   </div>
                   <div className="absolute bottom-4 left-4">
-                    <Badge variant="secondary" className="bg-white/90 text-foreground text-xs">
+                    <Badge variant="secondary" className="bg-white/90 text-foreground text-xs ring-1 ring-border/50">
                       {course.level}
                     </Badge>
                   </div>
                 </div>
                 
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{course.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2 transition-colors group-hover:text-primary">{course.title}</h3>
                   
                   <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-3">
                     <div className="flex items-center space-x-1">
@@ -291,8 +311,9 @@ const Courses = () => {
                   
                   <p className="text-muted-foreground mb-4">{course.description}</p>
                   
-                  <Button className="w-full btn-outline">
+                  <Button className="w-full btn-outline relative overflow-hidden hover:border-primary/40">
                     Learn More
+                    <span className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                   </Button>
                 </CardContent>
               </Card>
@@ -313,9 +334,9 @@ const Courses = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {guides.map((guide, index) => (
-              <Card key={guide.title} className={`hover-lift animate-fade-in stagger-${index + 1}`}>
+              <Card key={guide.title} className={`transition-all duration-700 ease-out ${true ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg ring-1 ring-border/50`}>
                 <CardContent className="p-6">
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center ring-1 ring-primary/20">
                     <FileText className="h-8 w-8 text-primary" />
                   </div>
                   
@@ -338,9 +359,10 @@ const Courses = () => {
                   
                   <p className="text-muted-foreground text-center mb-6">{guide.description}</p>
                   
-                  <Button className="w-full btn-hero">
+                  <Button className="w-full btn-hero relative overflow-hidden group">
                     <Download className="mr-2 h-4 w-4" />
                     {guide.price === "Free" ? "Download Free" : "Purchase & Download"}
+                    <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                   </Button>
                 </CardContent>
               </Card>
@@ -381,7 +403,7 @@ const Courses = () => {
                   resources: ["Foundations of Holistic Wellness", "Mindful Nutrition Workbook"]
                 }
               ].map((step) => (
-                <Card key={step.step} className="shadow-card">
+                <Card key={step.step} className="shadow-card ring-1 ring-border/50 transition-all duration-500 hover:shadow-lg">
                   <CardContent className="p-8">
                     <div className="flex items-start space-x-6">
                       <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg flex-shrink-0">

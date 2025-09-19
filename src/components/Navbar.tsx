@@ -33,7 +33,9 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isHome
-          ? (isScrolled ? "glass shadow-card" : "bg-black/50 backdrop-blur-md border-b border-white/10")
+          ? (isScrolled 
+              ? "glass shadow-card" 
+              : "bg-primary/25 backdrop-blur-lg border-b border-white/15")
           : "bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur border-b border-border shadow-sm"
       }`}
     >
@@ -50,8 +52,8 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation (show on large screens and up) */}
+          <div className="hidden lg:flex items-center space-x-6 lg:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -66,7 +68,7 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <Link to="/retreats">
               <Button variant="default" className="btn-hero">
                 Book a Retreat
@@ -77,7 +79,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
           >
             {isOpen ? (
               <X className="h-6 w-6 text-foreground" />
@@ -89,7 +91,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-border">
+          <div className="lg:hidden mt-4 py-4 border-t border-border">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link

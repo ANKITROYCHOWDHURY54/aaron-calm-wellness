@@ -13,6 +13,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useInView } from "@/hooks/useInView";
+import heroBg from "@/assets/hero-bg.jpg";
 import { 
   Calendar, 
   Clock, 
@@ -129,22 +131,36 @@ const Blog = () => {
     }
   };
 
+  const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-muted/30 to-background">
+      <section className="relative pt-12 md:pt-16 pb-16 md:pb-20 overflow-hidden min-h-[60vh] md:min-h-[60vh] text-white">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center"
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-background" />
+        <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl opacity-50" />
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl opacity-60" />
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6">Wellness Blog</Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
+          <div className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Wellness Blog</Badge>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Insights for{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Holistic Living
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in stagger-1">
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Practical wisdom, evidence-based insights, and real-world strategies 
               to support your wellness journey and help you thrive in daily life.
             </p>
@@ -164,7 +180,7 @@ const Blog = () => {
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-12 text-lg"
+                className="pl-10 h-12 text-lg focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
 
@@ -174,10 +190,10 @@ const Blog = () => {
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ring-1 hover:-translate-y-0.5 ${
                     selectedCategory === category.id
-                      ? "bg-primary text-white"
-                      : "bg-muted hover:bg-muted/80"
+                      ? "bg-primary text-white ring-primary/50 shadow-sm"
+                      : "bg-muted hover:bg-muted/80 ring-border"
                   }`}
                 >
                   {category.name} ({category.count})
@@ -196,8 +212,9 @@ const Blog = () => {
               <h2 className="text-3xl font-bold mb-4">Featured Article</h2>
             </div>
             
-            <Card className="overflow-hidden shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 animate-fade-in">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className={`p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image */}
                 <div className="relative h-64 lg:h-full min-h-[400px]">
                   <img
@@ -209,14 +226,15 @@ const Blog = () => {
                   
                   {/* Category Badge */}
                   <div className="absolute top-6 left-6">
-                    <Badge variant="secondary" className="bg-white/90 text-foreground capitalize">
+                    <Badge variant="secondary" className="bg-white/90 text-foreground capitalize ring-1 ring-border/50">
                       {featuredPost.category}
                     </Badge>
                   </div>
                 </div>
 
                 {/* Content */}
-                <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
+                <CardContent className="relative p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="pointer-events-none absolute inset-x-0 -top-1 h-20 bg-gradient-to-b from-white/25 to-transparent opacity-70" />
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-3xl md:text-4xl font-bold mb-4">
@@ -245,15 +263,17 @@ const Blog = () => {
 
                     {/* CTA */}
                     <div>
-                      <Button size="lg" className="btn-hero group">
+                      <Button size="lg" className="btn-hero group relative overflow-hidden">
                         Read Full Article
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                       </Button>
                     </div>
                   </div>
                 </CardContent>
-              </div>
-            </Card>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
@@ -273,16 +293,16 @@ const Blog = () => {
               {filteredPosts.map((post, index) => {
                 const CategoryIcon = getCategoryIcon(post.category);
                 return (
-                  <Card key={post.id} className={`overflow-hidden hover-lift animate-fade-in stagger-${index + 1}`}>
+                  <Card key={post.id} className={`group overflow-hidden ring-1 ring-border/50 transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl`} style={{ transitionDelay: inView ? `${80 + index * 80}ms` : undefined }}>
                     <div className="relative h-48">
                       <img
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
                       <div className="absolute top-4 left-4">
-                        <div className="flex items-center space-x-2 bg-white/90 rounded-full px-3 py-1">
+                        <div className="flex items-center space-x-2 bg-white/90 rounded-full px-3 py-1 ring-1 ring-border/50 shadow-sm">
                           <CategoryIcon className="h-4 w-4 text-primary" />
                           <span className="text-sm font-medium capitalize">{post.category}</span>
                         </div>
@@ -290,7 +310,7 @@ const Blog = () => {
                     </div>
                     
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-3 line-clamp-2">{post.title}</h3>
+                      <h3 className="text-xl font-semibold mb-3 line-clamp-2 transition-colors group-hover:text-primary">{post.title}</h3>
                       <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
                       
                       <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
@@ -304,9 +324,10 @@ const Blog = () => {
                         </div>
                       </div>
                       
-                      <Button className="w-full btn-outline group">
+                      <Button className="w-full btn-outline group relative overflow-hidden focus-visible:ring-2 focus-visible:ring-primary/40">
                         Read Article
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                       </Button>
                     </CardContent>
                   </Card>
@@ -349,8 +370,9 @@ const Blog = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <Card className="shadow-floating border-0 bg-gradient-to-br from-primary/5 to-accent/5">
-              <CardContent className="p-8 md:p-12 text-center">
+            <Card className="shadow-floating border border-white/20 bg-gradient-to-br from-primary/5 to-accent/5 overflow-hidden">
+              <CardContent className="relative p-8 md:p-12 text-center">
+                <div className="pointer-events-none absolute inset-x-0 -top-1 h-20 bg-gradient-to-b from-white/25 to-transparent opacity-70" />
                 <h3 className="text-3xl font-bold mb-4">Never Miss an Article</h3>
                 <p className="text-lg text-muted-foreground mb-8">
                   Get the latest wellness insights and practical tips delivered 
@@ -360,10 +382,11 @@ const Blog = () => {
                   <Input 
                     type="email" 
                     placeholder="Your email address"
-                    className="flex-1 h-12"
+                    className="flex-1 h-12 focus-visible:ring-2 focus-visible:ring-primary/40"
                   />
-                  <Button className="btn-hero">
+                  <Button className="btn-hero relative overflow-hidden group">
                     Subscribe
+                    <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                   </Button>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">
