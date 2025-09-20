@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Users, ArrowRight, Mountain, Waves, TreePine } from "lucide-react";
+import { MapPin, Calendar, Users, ArrowRight, Mountain, Waves, TreePine, Star, Clock, Heart, Award, Sparkles, Globe, Crown, CheckCircle, Play, Download } from "lucide-react";
 import retreatBg from "@/assets/retreat-bg.jpg";
 import { useInView } from "@/hooks/useInView";
+import { useState, useMemo } from "react";
 
 const RetreatHighlight = () => {
+  // Retreat filtering state
+  const [activeCategory, setActiveCategory] = useState("All Retreats");
+  const [priceRange, setPriceRange] = useState("all");
+  const [durationFilter, setDurationFilter] = useState("all");
+
   const featuredRetreat = {
     title: "Pathfinder Wellness Retreats",
     subtitle: "Immersive 3–5 day experiences",
@@ -23,6 +29,231 @@ const RetreatHighlight = () => {
       "Digital-light environment",
       "Small group setting"
     ]
+  };
+
+  // All retreats data
+  const allRetreats = [
+    {
+      id: "forest-immersion",
+      title: "Forest Immersion Retreat",
+      subtitle: "3-Day Nature Connection",
+      category: "Nature",
+      location: "Olympic Peninsula, WA",
+      date: "March 15-17, 2025",
+      duration: "3 days",
+      price: "$1,200",
+      originalPrice: "$1,500",
+      spots: "8 spots remaining",
+      maxParticipants: 12,
+      rating: 4.9,
+      reviews: 24,
+      image: retreatBg,
+      description: "Disconnect from the digital world and reconnect with yourself through mindful movement, breathwork, and nature immersion in the pristine Pacific Northwest wilderness.",
+      highlights: [
+        "Daily yoga & meditation sessions",
+        "Guided forest bathing experiences", 
+        "Breathwork workshops",
+        "Healthy, locally-sourced meals",
+        "Digital detox environment",
+        "Small group setting (max 12 people)"
+      ],
+      popular: true,
+      badge: "Most Popular",
+      badgeColor: "from-primary to-accent"
+    },
+    {
+      id: "coastal-wellness",
+      title: "Coastal Wellness Retreat",
+      subtitle: "5-Day Ocean Healing",
+      category: "Coastal",
+      location: "Big Sur, CA",
+      date: "April 20-24, 2025",
+      duration: "5 days",
+      price: "$1,800",
+      originalPrice: "$2,200",
+      spots: "6 spots remaining",
+      maxParticipants: 10,
+      rating: 4.8,
+      reviews: 18,
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop",
+      description: "Experience the healing power of the ocean with daily beach yoga, sound healing sessions, and mindfulness practices against the backdrop of California's stunning coastline.",
+      highlights: [
+        "Beach yoga at sunrise",
+        "Sound healing with ocean waves",
+        "Mindfulness meditation sessions",
+        "Farm-to-table organic meals",
+        "Ocean therapy workshops",
+        "Private beach access"
+      ],
+      popular: false,
+      badge: "New",
+      badgeColor: "from-green-500 to-emerald-500"
+    },
+    {
+      id: "mountain-silence",
+      title: "Mountain Silence Retreat",
+      subtitle: "4-Day High Altitude Healing",
+      category: "Mountain",
+      location: "Aspen, CO",
+      date: "May 10-13, 2025",
+      duration: "4 days",
+      price: "$1,500",
+      originalPrice: "$1,800",
+      spots: "4 spots remaining",
+      maxParticipants: 8,
+      rating: 4.9,
+      reviews: 15,
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+      description: "Find peace and clarity in the high mountains with silent meditation, breathwork, and contemplative practices in the serene Colorado wilderness.",
+      highlights: [
+        "Silent meditation sessions",
+        "High altitude breathwork",
+        "Mountain hiking & reflection",
+        "Plant-based gourmet meals",
+        "Digital-free environment",
+        "Intimate group (max 8 people)"
+      ],
+      popular: false,
+      badge: "Exclusive",
+      badgeColor: "from-purple-500 to-pink-500"
+    },
+    {
+      id: "desert-renewal",
+      title: "Desert Renewal Retreat",
+      subtitle: "3-Day Desert Transformation",
+      category: "Desert",
+      location: "Sedona, AZ",
+      date: "June 5-7, 2025",
+      duration: "3 days",
+      price: "$1,100",
+      originalPrice: "$1,400",
+      spots: "10 spots remaining",
+      maxParticipants: 15,
+      rating: 4.7,
+      reviews: 22,
+      image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&h=400&fit=crop",
+      description: "Transform in the mystical energy of Sedona with vortex experiences, energy healing, and spiritual practices in the heart of the red rock desert.",
+      highlights: [
+        "Vortex energy experiences",
+        "Energy healing sessions",
+        "Desert meditation practices",
+        "Organic vegetarian meals",
+        "Crystal healing workshops",
+        "Red rock hiking tours"
+      ],
+      popular: false,
+      badge: "Spiritual",
+      badgeColor: "from-orange-500 to-red-500"
+    },
+    {
+      id: "lake-serenity",
+      title: "Lake Serenity Retreat",
+      subtitle: "4-Day Water Wellness",
+      category: "Lake",
+      location: "Lake Tahoe, CA",
+      date: "July 12-15, 2025",
+      duration: "4 days",
+      price: "$1,400",
+      originalPrice: "$1,700",
+      spots: "7 spots remaining",
+      maxParticipants: 12,
+      rating: 4.8,
+      reviews: 19,
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop",
+      description: "Find balance and tranquility by the crystal-clear waters of Lake Tahoe with water-based wellness practices and mountain lake meditation.",
+      highlights: [
+        "Lakeside yoga sessions",
+        "Water meditation practices",
+        "Kayaking & paddleboarding",
+        "Fresh mountain air activities",
+        "Lakeside dining experiences",
+        "Sunset reflection sessions"
+      ],
+      popular: false,
+      badge: "Water Therapy",
+      badgeColor: "from-blue-500 to-cyan-500"
+    },
+    {
+      id: "forest-deep",
+      title: "Deep Forest Retreat",
+      subtitle: "5-Day Wilderness Immersion",
+      category: "Nature",
+      location: "Cascade Mountains, OR",
+      date: "August 8-12, 2025",
+      duration: "5 days",
+      price: "$1,600",
+      originalPrice: "$2,000",
+      spots: "5 spots remaining",
+      maxParticipants: 10,
+      rating: 4.9,
+      reviews: 16,
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+      description: "Dive deep into the ancient wisdom of the forest with extended wilderness immersion, plant medicine ceremonies, and earth connection practices.",
+      highlights: [
+        "Extended forest immersion",
+        "Plant medicine ceremonies",
+        "Wilderness survival skills",
+        "Foraged meals preparation",
+        "Earth connection practices",
+        "Ancient wisdom teachings"
+      ],
+      popular: false,
+      badge: "Wilderness",
+      badgeColor: "from-green-600 to-emerald-600"
+    }
+  ];
+
+  // Filter retreats based on active filters
+  const filteredRetreats = useMemo(() => {
+    return allRetreats.filter(retreat => {
+      // Category filter
+      if (activeCategory !== "All Retreats" && retreat.category !== activeCategory) {
+        return false;
+      }
+
+      // Price range filter
+      const retreatPrice = parseInt(retreat.price.replace('$', '').replace(',', ''));
+      if (priceRange !== "all") {
+        switch (priceRange) {
+          case "under-1200":
+            if (retreatPrice >= 1200) return false;
+            break;
+          case "1200-1500":
+            if (retreatPrice < 1200 || retreatPrice > 1500) return false;
+            break;
+          case "1500-1800":
+            if (retreatPrice < 1500 || retreatPrice > 1800) return false;
+            break;
+          case "over-1800":
+            if (retreatPrice <= 1800) return false;
+            break;
+        }
+      }
+
+      // Duration filter
+      if (durationFilter !== "all") {
+        const retreatDuration = retreat.duration.toLowerCase();
+        switch (durationFilter) {
+          case "short":
+            if (!retreatDuration.includes("3 day")) return false;
+            break;
+          case "medium":
+            if (!retreatDuration.includes("4 day")) return false;
+            break;
+          case "long":
+            if (!retreatDuration.includes("5 day")) return false;
+            break;
+        }
+      }
+
+      return true;
+    });
+  }, [activeCategory, priceRange, durationFilter]);
+
+  // Get retreat counts for categories
+  const getCategoryCount = (category: string) => {
+    if (category === "All Retreats") return allRetreats.length;
+    return allRetreats.filter(retreat => retreat.category === category).length;
   };
 
   const { ref: sectionRef, inView } = useInView<HTMLDivElement>({ threshold: 0.2, margin: "0px 0px -10% 0px", once: true });
