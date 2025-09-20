@@ -19,8 +19,10 @@ import {
 import retreatBg from "@/assets/retreat-bg.jpg";
 import heroBg from "@/assets/retreat-bg.jpg";
 import { useInView } from "@/hooks/useInView";
+import { useState } from "react";
 
 const Retreats = () => {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const featuredRetreat = {
     id: "pathfinder-spring",
     title: "Pathfinder Wellness Retreat",
@@ -97,6 +99,27 @@ const Retreats = () => {
   ];
 
   const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+  const { ref: heroRef, inView: heroInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: featuredRef, inView: featuredInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: upcomingRef, inView: upcomingInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: expectRef, inView: expectInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: testimonialsRef, inView: testimonialsInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: ctaRef, inView: ctaInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  
+  // Individual retreat card animations
+  const { ref: retreat1Ref, inView: retreat1InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: retreat2Ref, inView: retreat2InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: retreat3Ref, inView: retreat3InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+
+  // Function to get retreat animation state
+  const getRetreatAnimation = (index: number) => {
+    const retreatRefs = [retreat1Ref, retreat2Ref, retreat3Ref];
+    const retreatInViews = [retreat1InView, retreat2InView, retreat3InView];
+    return {
+      ref: retreatRefs[index],
+      inView: retreatInViews[index]
+    };
+  };
 
   return (
     <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
@@ -116,16 +139,16 @@ const Retreats = () => {
         <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl opacity-50" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl opacity-60" />
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
-            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Wellness Retreats</Badge>
-            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div ref={heroRef} className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Wellness Retreats</Badge>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '80ms' : undefined }}>
               Transformative{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Retreat Experiences
               </span>
             </h1>
-            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
-            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${heroInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} style={{ transitionDelay: heroInView ? '120ms' : undefined }} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '160ms' : undefined }}>
               Step away from the everyday and into carefully crafted experiences designed 
               to restore, rejuvenate, and reconnect you with your truest self in nature's embrace.
             </p>
@@ -134,11 +157,16 @@ const Retreats = () => {
       </section>
 
       {/* Featured Retreat */}
-      <section className="py-16 sm:py-20">
+      <section ref={featuredRef} className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] animate-fade-in">
-              <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl">
+            <div className={`p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <div 
+                className="relative"
+                onMouseEnter={() => setHoveredCard('featured')}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image */}
                 <div className="relative h-56 sm:h-64 lg:h-full lg:min-h-[500px]">
@@ -253,15 +281,33 @@ const Retreats = () => {
                 </CardContent>
                 </div>
               </Card>
+
+              {/* Simple Elegant Hover Effects for Featured Retreat */}
+              <div className="absolute -inset-2 pointer-events-none overflow-visible z-20">
+                {/* Subtle Shadow Expansion */}
+                <div className={`absolute inset-0 rounded-2xl transition-all duration-500 ${
+                  hoveredCard === 'featured'
+                    ? 'shadow-[0_20px_40px_rgba(74,120,86,0.15)]' 
+                    : 'shadow-none'
+                }`} />
+                
+                {/* Simple Border Glow */}
+                <div className={`absolute inset-0 rounded-2xl border transition-all duration-400 ${
+                  hoveredCard === 'featured'
+                    ? 'border-primary/20' 
+                    : 'border-transparent'
+                }`} />
+              </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Upcoming Retreats */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
+      <section ref={upcomingRef} className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${upcomingInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Upcoming Retreats</h2>
             <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               Each retreat offers a unique seasonal experience, thoughtfully designed 
@@ -270,8 +316,16 @@ const Retreats = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
-            {upcomingRetreats.map((retreat, index) => (
-              <Card key={retreat.id} className={`group overflow-hidden transition-all duration-700 ease-out ${true ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl ring-1 ring-border/50`}>
+            {upcomingRetreats.map((retreat, index) => {
+              const { ref: retreatRef, inView: retreatInView } = getRetreatAnimation(index);
+              return (
+                <div 
+                  key={retreat.id}
+                  className="relative"
+                  onMouseEnter={() => setHoveredCard(retreat.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <Card ref={retreatRef} className={`group overflow-hidden transition-all duration-700 ease-out ${retreatInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl ring-1 ring-border/50`}>
                 <div className="relative h-48">
                   <img
                     src={retreat.image}
@@ -302,19 +356,38 @@ const Retreats = () => {
                   <Button className="w-full btn-outline relative overflow-hidden hover:border-primary/40">
                     Learn More
                     <span className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Clean Hover Effects for Upcoming Retreat Cards */}
+                <div className="absolute -inset-1 pointer-events-none overflow-visible z-20">
+                  {/* Subtle Shadow */}
+                  <div className={`absolute inset-0 rounded-xl transition-all duration-400 ${
+                    hoveredCard === retreat.id
+                      ? 'shadow-[0_10px_25px_rgba(74,120,86,0.1)]' 
+                      : 'shadow-none'
+                  }`} />
+                  
+                  {/* Simple Border */}
+                  <div className={`absolute inset-0 rounded-xl border transition-all duration-300 ${
+                    hoveredCard === retreat.id
+                      ? 'border-primary/15' 
+                      : 'border-transparent'
+                  }`} />
+                </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* What to Expect */}
-      <section className="py-16 sm:py-20">
+      <section ref={expectRef} className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12 sm:mb-16">
+            <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${expectInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">What to Expect</h2>
               <p className="text-base sm:text-xl text-muted-foreground">
                 Every retreat is carefully crafted to provide the perfect balance of 
@@ -346,8 +419,8 @@ const Retreats = () => {
                     "Ongoing support community"
                   ]
                 }
-              ].map((section) => (
-                <Card key={section.title} className="shadow-card ring-1 ring-border/50 transition-all duration-500 hover:shadow-lg">
+              ].map((section, index) => (
+                <Card key={section.title} className={`shadow-card ring-1 ring-border/50 transition-all duration-1000 ${expectInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:shadow-lg`} style={{ transitionDelay: expectInView ? `${200 + index * 100}ms` : undefined }}>
                   <CardContent className="p-6">
                     <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">{section.title}</h3>
                     <ul className="space-y-3">
@@ -367,9 +440,9 @@ const Retreats = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
+      <section ref={testimonialsRef} className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Retreat Experiences</h2>
             <p className="text-base sm:text-xl text-muted-foreground">
               Hear from participants who have transformed their lives through our retreat experiences.
@@ -378,7 +451,13 @@ const Retreats = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={testimonial.name} className={`shadow-card ring-1 ring-border/50 transition-all duration-700 ease-out ${true ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg`}>
+              <div 
+                key={testimonial.name}
+                className="relative"
+                onMouseEnter={() => setHoveredCard(`testimonial-${index}`)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <Card className={`shadow-card ring-1 ring-border/50 transition-all duration-700 ease-out ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg`} style={{ transitionDelay: testimonialsInView ? `${100 + index * 100}ms` : undefined }}>
                 <CardContent className="p-6">
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
@@ -391,21 +470,39 @@ const Retreats = () => {
                   <div className="font-semibold">{testimonial.name}</div>
                 </CardContent>
               </Card>
+
+              {/* Minimal Hover Effects for Testimonial Cards */}
+              <div className="absolute -inset-1 pointer-events-none overflow-visible z-20">
+                {/* Soft Shadow */}
+                <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
+                  hoveredCard === `testimonial-${index}`
+                    ? 'shadow-[0_8px_20px_rgba(74,120,86,0.08)]' 
+                    : 'shadow-none'
+                }`} />
+                
+                {/* Gentle Border */}
+                <div className={`absolute inset-0 rounded-lg border transition-all duration-250 ${
+                  hoveredCard === `testimonial-${index}`
+                    ? 'border-primary/10' 
+                    : 'border-transparent'
+                }`} />
+              </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20">
+      <section ref={ctaRef} className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Ready for Your Retreat Experience?</h2>
             <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8">
               Spaces are limited to ensure an intimate, personalized experience. 
               Reserve your spot today and take the first step toward transformation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+            <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center transition-all duration-1000 ${ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: ctaInView ? '200ms' : undefined }}>
               <Link to="/contact">
                 <Button size="lg" className="btn-hero w-full sm:w-auto group">
                   Reserve Your Spot

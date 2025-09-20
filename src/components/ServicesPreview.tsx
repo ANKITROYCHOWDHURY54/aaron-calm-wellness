@@ -149,17 +149,20 @@ const ServicesPreview = () => {
             const delay = index * 150;
             
             return (
-              <Card 
+              <div 
                 key={service.title}
-                className={`group cursor-pointer h-full border border-white/10 transition-all duration-700 ease-out will-change-transform relative ${
-                  isVisible 
-                    ? 'opacity-100 translate-y-0 scale-100' 
-                    : 'opacity-0 translate-y-12 scale-95'
-                }`}
-                style={{ transitionDelay: `${delay}ms` }}
+                className="relative"
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
+                <Card 
+                  className={`group cursor-pointer h-full border border-white/10 transition-all duration-700 ease-out will-change-transform relative ${
+                    isVisible 
+                      ? 'opacity-100 translate-y-0 scale-100' 
+                      : 'opacity-0 translate-y-12 scale-95'
+                  }`}
+                  style={{ transitionDelay: `${delay}ms` }}
+                >
                 {/* Loading Skeleton */}
                 {isLoading && (
                   <div className="absolute inset-0 bg-gradient-to-r from-muted/50 via-muted/30 to-muted/50 animate-pulse rounded-lg" />
@@ -186,23 +189,6 @@ const ServicesPreview = () => {
                     }}
                   />
                   
-                  {/* Floating Particles Effect */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
-                      <div
-                        key={i}
-                        className={`absolute w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-60 transition-all duration-1000 ${
-                          isHovered ? 'animate-float' : ''
-                        }`}
-                        style={{
-                          left: `${20 + i * 15}%`,
-                          top: `${30 + i * 10}%`,
-                          animationDelay: `${i * 100}ms`,
-                          animationDuration: `${2000 + i * 200}ms`
-                        }}
-                      />
-                    ))}
-                  </div>
 
                   {/* Icon */}
                   <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} p-4 mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ring-1 ring-white/20 relative z-10 group-hover:shadow-lg`}>
@@ -277,6 +263,45 @@ const ServicesPreview = () => {
                   <div className="absolute inset-0 -top-2 -left-2 w-[calc(100%+1rem)] h-[calc(100%+1rem)] bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-opacity duration-500" />
                 </CardContent>
               </Card>
+
+              {/* Subtle Hover Effects */}
+              <div className="absolute -inset-4 pointer-events-none overflow-visible z-20">
+                {/* Soft Glow Ring */}
+                <div className={`absolute inset-0 rounded-2xl border-2 transition-all duration-500 ${
+                  isHovered 
+                    ? 'border-primary/30 shadow-[0_0_30px_rgba(74,120,86,0.3)]' 
+                    : 'border-transparent shadow-none'
+                }`} />
+                
+                {/* Corner Accents */}
+                <div className={`absolute -top-2 -left-2 w-4 h-4 bg-gradient-to-br from-primary/20 to-transparent rounded-full transition-all duration-300 ${
+                  isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                }`} />
+                <div className={`absolute -top-2 -right-2 w-4 h-4 bg-gradient-to-bl from-primary/20 to-transparent rounded-full transition-all duration-300 ${
+                  isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                }`} style={{ transitionDelay: '100ms' }} />
+                <div className={`absolute -bottom-2 -left-2 w-4 h-4 bg-gradient-to-tr from-primary/20 to-transparent rounded-full transition-all duration-300 ${
+                  isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                }`} style={{ transitionDelay: '200ms' }} />
+                <div className={`absolute -bottom-2 -right-2 w-4 h-4 bg-gradient-to-tl from-primary/20 to-transparent rounded-full transition-all duration-300 ${
+                  isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+                }`} style={{ transitionDelay: '300ms' }} />
+                
+                {/* Glowing Floating Dots */}
+                <div className={`absolute top-1/2 -left-3 w-2 h-2 bg-primary rounded-full transition-all duration-400 ${
+                  isHovered ? 'opacity-100 translate-x-0 shadow-[0_0_15px_rgba(74,120,86,0.8)]' : 'opacity-0 -translate-x-2 shadow-none'
+                }`} style={{ transitionDelay: '150ms' }} />
+                <div className={`absolute top-1/2 -right-3 w-2 h-2 bg-primary rounded-full transition-all duration-400 ${
+                  isHovered ? 'opacity-100 translate-x-0 shadow-[0_0_15px_rgba(74,120,86,0.8)]' : 'opacity-0 translate-x-2 shadow-none'
+                }`} style={{ transitionDelay: '250ms' }} />
+                <div className={`absolute -top-3 left-1/2 w-2 h-2 bg-primary rounded-full transition-all duration-400 ${
+                  isHovered ? 'opacity-100 translate-y-0 shadow-[0_0_15px_rgba(74,120,86,0.8)]' : 'opacity-0 -translate-y-2 shadow-none'
+                }`} style={{ transitionDelay: '200ms' }} />
+                <div className={`absolute -bottom-3 left-1/2 w-2 h-2 bg-primary rounded-full transition-all duration-400 ${
+                  isHovered ? 'opacity-100 translate-y-0 shadow-[0_0_15px_rgba(74,120,86,0.8)]' : 'opacity-0 translate-y-2 shadow-none'
+                }`} style={{ transitionDelay: '350ms' }} />
+              </div>
+              </div>
             );
           })}
         </div>

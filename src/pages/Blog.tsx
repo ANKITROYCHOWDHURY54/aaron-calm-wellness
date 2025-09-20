@@ -132,6 +132,29 @@ const Blog = () => {
   };
 
   const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+  const { ref: heroRef, inView: heroInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: searchRef, inView: searchInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: featuredRef, inView: featuredInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: postsRef, inView: postsInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: newsletterRef, inView: newsletterInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  
+  // Individual blog post animations
+  const { ref: post1Ref, inView: post1InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: post2Ref, inView: post2InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: post3Ref, inView: post3InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: post4Ref, inView: post4InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: post5Ref, inView: post5InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: post6Ref, inView: post6InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+
+  // Function to get blog post animation state
+  const getPostAnimation = (index: number) => {
+    const postRefs = [post1Ref, post2Ref, post3Ref, post4Ref, post5Ref, post6Ref];
+    const postInViews = [post1InView, post2InView, post3InView, post4InView, post5InView, post6InView];
+    return {
+      ref: postRefs[index],
+      inView: postInViews[index]
+    };
+  };
 
   return (
     <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
@@ -151,16 +174,16 @@ const Blog = () => {
         <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl opacity-50" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl opacity-60" />
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
-            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Wellness Blog</Badge>
-            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div ref={heroRef} className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Wellness Blog</Badge>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '80ms' : undefined }}>
               Insights for{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 Holistic Living
               </span>
             </h1>
-            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
-            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${heroInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} style={{ transitionDelay: heroInView ? '120ms' : undefined }} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '160ms' : undefined }}>
               Practical wisdom, evidence-based insights, and real-world strategies 
               to support your wellness journey and help you thrive in daily life.
             </p>
@@ -169,11 +192,11 @@ const Blog = () => {
       </section>
 
       {/* Search & Filter */}
-      <section className="py-12 bg-gradient-to-b from-background to-muted/20">
+      <section ref={searchRef} className="py-12 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Search Bar */}
-            <div className="relative mb-8">
+            <div className={`relative mb-8 transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="text"
@@ -185,7 +208,7 @@ const Blog = () => {
             </div>
 
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className={`flex flex-wrap gap-3 justify-center transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: searchInView ? '200ms' : undefined }}>
               {categories.map((category) => (
                 <button
                   key={category.id}
@@ -205,14 +228,14 @@ const Blog = () => {
       </section>
 
       {/* Featured Post */}
-      <section className="py-20">
+      <section ref={featuredRef} className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
+            <div className={`text-center mb-12 transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h2 className="text-3xl font-bold mb-4">Featured Article</h2>
             </div>
             
-            <div className={`p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: featuredInView ? '200ms' : undefined }}>
               <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image */}
@@ -279,10 +302,10 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-20 bg-gradient-to-b from-muted/20 to-background">
+      <section ref={postsRef} className="py-20 bg-gradient-to-b from-muted/20 to-background">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
+            <div className={`text-center mb-16 transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <h2 className="text-4xl font-bold mb-6">Latest Articles</h2>
               <p className="text-xl text-muted-foreground">
                 {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''} found
@@ -292,8 +315,9 @@ const Blog = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post, index) => {
                 const CategoryIcon = getCategoryIcon(post.category);
+                const { ref: postRef, inView: postInView } = getPostAnimation(index);
                 return (
-                  <Card key={post.id} className={`group overflow-hidden ring-1 ring-border/50 transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl`} style={{ transitionDelay: inView ? `${80 + index * 80}ms` : undefined }}>
+                  <Card key={post.id} ref={postRef} className={`group overflow-hidden ring-1 ring-border/50 transition-all duration-700 ease-out ${postInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl`}>
                     <div className="relative h-48">
                       <img
                         src={post.image}
@@ -328,11 +352,11 @@ const Blog = () => {
                         Read Article
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
             </div>
 
             {filteredPosts.length === 0 && (
@@ -367,10 +391,10 @@ const Blog = () => {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20">
+      <section ref={newsletterRef} className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <Card className="shadow-floating border border-white/20 bg-gradient-to-br from-primary/5 to-accent/5 overflow-hidden">
+            <Card className={`shadow-floating border border-white/20 bg-gradient-to-br from-primary/5 to-accent/5 overflow-hidden transition-all duration-1000 ${newsletterInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <CardContent className="relative p-8 md:p-12 text-center">
                 <div className="pointer-events-none absolute inset-x-0 -top-1 h-20 bg-gradient-to-b from-white/25 to-transparent opacity-70" />
                 <h3 className="text-3xl font-bold mb-4">Never Miss an Article</h3>

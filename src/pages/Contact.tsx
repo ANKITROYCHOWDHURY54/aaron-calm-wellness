@@ -110,6 +110,9 @@ const Contact = () => {
   ];
 
   const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+  const { ref: heroRef, inView: heroInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: methodsRef, inView: methodsInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: formRef, inView: formInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
 
   return (
     <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
@@ -126,20 +129,21 @@ const Contact = () => {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/50 to-accent/60" />
+        <div className="absolute inset-0 bg-black/40" />
         
         <div className="relative z-10 container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div ref={heroRef} className="max-w-4xl mx-auto text-center text-white">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               Get in Touch
             </Badge>
-            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '80ms' : undefined }}>
               Let's Start Your{" "}
               <span className="text-accent-light">
                 Wellness Journey
               </span>
             </h1>
-            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-white/70 transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
-            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-white/70 transition-all duration-1000 ${heroInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} style={{ transitionDelay: heroInView ? '120ms' : undefined }} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '160ms' : undefined }}>
               Ready to transform your health and well-being? I'm here to support you 
               every step of the way. Reach out and let's discuss how we can work together.
             </p>
@@ -148,13 +152,13 @@ const Contact = () => {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
+      <section ref={methodsRef} className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16 md:mb-20">
             {contactMethods.map((method, index) => {
               const Icon = method.icon;
               return (
-                <Card key={method.title} className={`text-center transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg ring-1 ring-border/50`} style={{ transitionDelay: inView ? `${80 + index * 80}ms` : undefined }}>
+                <Card key={method.title} className={`text-center transition-all duration-700 ease-out ${methodsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg ring-1 ring-border/50`} style={{ transitionDelay: methodsInView ? `${80 + index * 80}ms` : undefined }}>
                   <CardContent className="p-6">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center ring-1 ring-primary/20 transition-transform duration-300 hover:scale-110">
                       <Icon className="h-8 w-8 text-primary" />
@@ -180,11 +184,11 @@ const Contact = () => {
       </section>
 
       {/* Contact Form */}
-      <section className="py-16 sm:py-20">
+      <section ref={formRef} className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
             {/* Form */}
-            <div className={`transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`transition-all duration-1000 ${formInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <div className="mb-6 sm:mb-8">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Send a Message</h2>
                 <p className="text-base sm:text-lg text-muted-foreground">
@@ -304,7 +308,7 @@ const Contact = () => {
             </div>
 
             {/* Info Sidebar */}
-            <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className={`space-y-6 sm:space-y-8 transition-all duration-1000 ${formInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: formInView ? '200ms' : undefined }}>
               {/* Quick Actions */}
               <Card className="shadow-card ring-1 ring-border/50 transition-all duration-500 hover:shadow-lg">
                 <CardContent className="relative p-6">

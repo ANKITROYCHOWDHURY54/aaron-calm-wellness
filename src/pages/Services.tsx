@@ -125,6 +125,26 @@ const Services = () => {
   ];
 
   const { ref: pageRef, inView } = useInView<HTMLDivElement>({ threshold: 0, margin: "0px", once: true });
+  const { ref: heroRef, inView: heroInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: servicesRef, inView: servicesInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: formatsRef, inView: formatsInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: ctaRef, inView: ctaInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  
+  // Individual service animations
+  const { ref: service1Ref, inView: service1InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: service2Ref, inView: service2InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: service3Ref, inView: service3InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: service4Ref, inView: service4InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+
+  // Function to get service animation state
+  const getServiceAnimation = (index: number) => {
+    const serviceRefs = [service1Ref, service2Ref, service3Ref, service4Ref];
+    const serviceInViews = [service1InView, service2InView, service3InView, service4InView];
+    return {
+      ref: serviceRefs[index],
+      inView: serviceInViews[index]
+    };
+  };
 
   return (
     <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
@@ -144,11 +164,11 @@ const Services = () => {
         <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-primary/15 blur-3xl opacity-50" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl opacity-60" />
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
-            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Services</Badge>
-            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Services</h1>
-            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${inView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} />
-            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div ref={heroRef} className="max-w-4xl mx-auto text-center text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.45)]">
+            <Badge variant="secondary" className={`mb-4 sm:mb-6 bg-white/20 text-white border-white/30 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>Services</Badge>
+            <h1 className={`text-3xl sm:text-5xl md:text-6xl leading-tight sm:leading-[1.1] font-bold mb-2 sm:mb-3 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '80ms' : undefined }}>Services</h1>
+            <div className={`mx-auto h-1 w-20 sm:w-24 rounded-full bg-gradient-to-r from-primary to-accent transition-all duration-1000 ${heroInView ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`} style={{ transitionDelay: heroInView ? '120ms' : undefined }} />
+            <p className={`text-base sm:text-xl text-white/90 max-w-3xl mx-auto mt-4 sm:mt-6 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '160ms' : undefined }}>
               Yoga & Breathwork, Mobility & Injury Prevention, Lifestyle Coaching, and Corporate Wellness.
             </p>
           </div>
@@ -156,13 +176,15 @@ const Services = () => {
       </section>
 
       {/* Services */}
-      <section className="py-16 sm:py-20">
+      <section ref={servicesRef} className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
           <div className="space-y-16 md:space-y-24 lg:space-y-32">
-            {services.map((service, index) => (
-              <div key={service.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                {/* Image */}
-                <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: inView ? `${120 + index * 80}ms` : undefined }}>
+            {services.map((service, index) => {
+              const { ref: serviceRef, inView: serviceInView } = getServiceAnimation(index);
+              return (
+                <div key={service.id} ref={serviceRef} className={`grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                  {/* Image */}
+                  <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} transition-all duration-1000 ${serviceInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: serviceInView ? '120ms' : undefined }}>
                   <div className="relative overflow-hidden rounded-2xl shadow-floating group ring-1 ring-border/50 [transform-style:preserve-3d] transition-all duration-500 ease-out hover:-rotate-[0.6deg] hover:shadow-2xl">
                     <img
                       src={service.image}
@@ -188,8 +210,8 @@ const Services = () => {
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className={`space-y-6 sm:space-y-8 ${index % 2 === 1 ? 'lg:order-1' : ''} transition-all duration-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: inView ? `${180 + index * 80}ms` : undefined }}>
+                  {/* Content */}
+                  <div className={`space-y-6 sm:space-y-8 ${index % 2 === 1 ? 'lg:order-1' : ''} transition-all duration-1000 ${serviceInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: serviceInView ? '180ms' : undefined }}>
                   <div>
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">{service.title}</h2>
                     <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-4 sm:mb-6">
@@ -235,18 +257,19 @@ const Services = () => {
                       Learn More
                       <span className="pointer-events-none absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                     </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* Service Formats */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
+      <section ref={formatsRef} className="py-16 sm:py-20 bg-gradient-to-b from-muted/30 to-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${formatsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Flexible Formats</h2>
             <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">
               Choose the format that works best for your schedule, preferences, and goals.
@@ -276,7 +299,7 @@ const Services = () => {
                 icon: "🏢"
               }
             ].map((format, index) => (
-              <Card key={format.title} className={`text-center transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg`} style={{ transitionDelay: inView ? `${100 + index * 80}ms` : undefined }}>
+              <Card key={format.title} className={`text-center transition-all duration-700 ease-out ${formatsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-lg`} style={{ transitionDelay: formatsInView ? `${100 + index * 80}ms` : undefined }}>
                 <CardContent className="p-5 sm:p-6">
                   <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{format.icon}</div>
                   <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{format.title}</h3>
@@ -289,15 +312,15 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20">
+      <section ref={ctaRef} className="py-16 sm:py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className={`max-w-4xl mx-auto text-center transition-all duration-1000 ${ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6">Ready to Begin?</h2>
             <p className="text-base sm:text-xl text-muted-foreground mb-6 sm:mb-8">
               Take the first step towards a more balanced, healthier you. Let's discuss 
               which service is the perfect fit for your goals and lifestyle.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+            <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center transition-all duration-1000 ${ctaInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: ctaInView ? '200ms' : undefined }}>
               <Link to="/contact">
                 <Button size="lg" className="btn-hero w-full sm:w-auto group relative overflow-hidden">
                   Schedule a Consultation
