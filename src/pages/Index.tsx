@@ -274,7 +274,7 @@ const Index = () => {
                   )}
 
                   <Card
-                    className={`group relative transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl border-border/50 hover:border-primary/30 overflow-hidden ${
+                    className={`group relative transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-2xl border-border/50 hover:border-primary/30 overflow-hidden ${
                       course.popular ? 'ring-2 ring-primary shadow-floating sm:scale-105 mt-6 sm:mt-8' :
                       course.rating >= 4.9 ? 'ring-1 ring-yellow-400/30 shadow-lg' : ''
                     }`}
@@ -284,7 +284,7 @@ const Index = () => {
                       <img
                         src={course.image}
                         alt={course.title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
@@ -329,7 +329,7 @@ const Index = () => {
                       <div className="relative z-10">
                         {/* Header */}
                         <div className="mb-3 sm:mb-4">
-                          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 transition-colors group-hover:text-primary line-clamp-2">
+                          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1 line-clamp-2">
                             {course.title}
                           </h3>
                           
@@ -378,8 +378,8 @@ const Index = () => {
                             {course.features.slice(0, 2).map((feature, featureIndex) => (
                               <li 
                                 key={featureIndex} 
-                                className="flex items-start text-xs sm:text-sm text-muted-foreground group-hover:translate-x-1 transition-transform duration-300"
-                                style={{ transitionDelay: `${featureIndex * 50}ms` }}
+                                className="flex items-start text-xs sm:text-sm text-muted-foreground group-hover:translate-x-2 transition-transform duration-300 ease-out"
+                                style={{ transitionDelay: `${featureIndex * 100}ms` }}
                               >
                                 <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-primary mr-1.5 sm:mr-2 flex-shrink-0 mt-0.5" />
                                 <span className="leading-relaxed text-xs sm:text-sm md:text-base">{feature}</span>
@@ -413,13 +413,13 @@ const Index = () => {
                         
                         {/* CTA Button */}
                         <Button 
-                          className={`w-full group-hover:scale-105 transition-all duration-300 text-xs sm:text-sm md:text-base ${
+                          className={`w-full group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300 text-xs sm:text-sm md:text-base ${
                             course.popular ? 'btn-hero' : 'btn-outline'
                           }`}
                           size="sm"
                         >
                           {course.popular ? 'Enroll Now' : 'Learn More'}
-                          <ArrowRight className="ml-1.5 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className="ml-1.5 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 group-hover:translate-x-2 transition-transform duration-300" />
                         </Button>
                       </div>
 
@@ -444,14 +444,14 @@ const Index = () => {
                   return (
                     <div 
                       key={stat.label}
-                      className="text-center group"
+                      className="text-center group hover:-translate-y-2 transition-all duration-300 ease-out"
                       style={{ transitionDelay: `${600 + index * 100}ms` }}
                     >
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto mb-2 sm:mb-3 rounded-lg sm:rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white" />
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto mb-2 sm:mb-3 rounded-lg sm:rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                        <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white group-hover:scale-110 transition-transform duration-300" />
                       </div>
-                      <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-                      <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-tight px-1">{stat.label}</div>
+                      <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">{stat.value}</div>
+                      <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-tight px-1 group-hover:text-foreground transition-colors duration-300">{stat.label}</div>
                     </div>
                   );
                 })}
