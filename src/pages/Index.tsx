@@ -165,7 +165,7 @@ const Index = () => {
             </div>
 
             {/* Enhanced Course Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-6 sm:mb-8 md:mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 md:mb-12">
               {[
                 {
                   title: "Foundations of Holistic Wellness",
@@ -285,7 +285,7 @@ const Index = () => {
                     }`}
                     style={{ transitionDelay: `${400 + index * 100}ms` }}
                   >
-                    <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 overflow-hidden">
+                    <div className="relative h-48 sm:h-56 md:h-64 lg:h-72 overflow-hidden">
                       <img
                         src={course.image}
                         alt={course.title}
@@ -327,14 +327,14 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <CardContent className="p-3 sm:p-4 md:p-6 lg:p-8 relative h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] flex flex-col">
+                    <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 relative min-h-[20rem] sm:min-h-[24rem] md:min-h-[28rem] flex flex-col">
                       {/* Background gradient */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                       <div className="relative z-10">
                         {/* Header */}
                         <div className="mb-3 sm:mb-4">
-                          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1 line-clamp-2">
+                          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold mb-2 sm:mb-3 transition-all duration-300 group-hover:text-primary group-hover:translate-x-1 line-clamp-2">
                             {course.title}
                           </h3>
                           
@@ -372,14 +372,14 @@ const Index = () => {
                         </div>
 
                         {/* Description */}
-                        <p className="text-muted-foreground mb-3 sm:mb-4 text-xs sm:text-sm md:text-base line-clamp-2 leading-relaxed">
+                        <p className="text-muted-foreground mb-2 sm:mb-3 text-xs sm:text-sm line-clamp-2 leading-relaxed">
                           {course.description}
                         </p>
                         
                         {/* Course Features */}
-                        <div className="mb-3 sm:mb-4">
-                          <h4 className="text-xs sm:text-sm md:text-base font-semibold mb-2 sm:mb-3 text-foreground">What's Included:</h4>
-                          <ul className="space-y-1 sm:space-y-2">
+                        <div className="mb-2 sm:mb-3">
+                          <h4 className="text-xs sm:text-sm font-semibold mb-1 sm:mb-2 text-foreground">What's Included:</h4>
+                          <ul className="space-y-1">
                             {course.features.slice(0, 2).map((feature, featureIndex) => (
                               <li 
                                 key={featureIndex} 
@@ -479,7 +479,7 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto px-2 sm:px-4">
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto px-4 sm:px-6">
                 {/* Beginner Bundle */}
                 <div className={`relative transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: coursesInView ? '1000ms' : undefined }}>
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
@@ -489,7 +489,7 @@ const Index = () => {
                   </div>
 
                   <Card className="group relative transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl border-border/50 hover:border-primary/30 overflow-hidden mt-6">
-                    <div className="relative h-72">
+                    <div className="relative h-56 sm:h-64 md:h-72 lg:h-80">
                       <img
                         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop"
                         alt="Beginner Wellness Bundle"
@@ -501,19 +501,19 @@ const Index = () => {
                         <Badge className="mb-3 bg-primary/20 text-primary border-primary/30 backdrop-blur-sm">
                           Beginner Friendly
                         </Badge>
-                        <h4 className="text-2xl font-bold text-white mb-2">Wellness Foundations Bundle</h4>
-                        <p className="text-white/90 text-sm leading-relaxed">Perfect for those starting their wellness journey with essential tools and practices</p>
+                        <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Wellness Foundations Bundle</h4>
+                        <p className="text-white/90 text-xs sm:text-sm leading-relaxed">Perfect for those starting their wellness journey with essential tools and practices</p>
                       </div>
 
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                          <Play className="h-8 w-8 text-white ml-1" />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                          <Play className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 text-white ml-1" />
                         </div>
                       </div>
                     </div>
 
-                    <CardContent className="p-4 sm:p-6 lg:p-8 relative h-96 sm:h-[28rem] md:h-[32rem] lg:h-[36rem] flex flex-col">
+                    <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 relative min-h-[24rem] sm:min-h-[28rem] md:min-h-[32rem] flex flex-col">
                       {/* Background gradient */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -581,7 +581,7 @@ const Index = () => {
                   </div>
 
                   <Card className="group relative transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl overflow-hidden mt-6">
-                    <div className="relative h-72">
+                    <div className="relative h-56 sm:h-64 md:h-72 lg:h-80">
                       <img
                         src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop"
                         alt="Advanced Wellness Bundle"
@@ -593,19 +593,19 @@ const Index = () => {
                         <Badge className="mb-3 bg-accent/20 text-accent border-accent/30 backdrop-blur-sm">
                           Advanced Level
                         </Badge>
-                        <h4 className="text-2xl font-bold text-white mb-2">Complete Wellness Mastery</h4>
-                        <p className="text-white/90 text-sm leading-relaxed">Everything you need for comprehensive wellness transformation and mastery</p>
+                        <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Complete Wellness Mastery</h4>
+                        <p className="text-white/90 text-xs sm:text-sm leading-relaxed">Everything you need for comprehensive wellness transformation and mastery</p>
                       </div>
 
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                          <Play className="h-8 w-8 text-white ml-1" />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
+                          <Play className="h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 text-white ml-1" />
                         </div>
                       </div>
                     </div>
 
-                    <CardContent className="p-4 sm:p-6 lg:p-8 relative h-96 sm:h-[28rem] md:h-[32rem] lg:h-[36rem] flex flex-col">
+                    <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6 xl:p-8 relative min-h-[24rem] sm:min-h-[28rem] md:min-h-[32rem] flex flex-col">
                       {/* Background gradient */}
                       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
