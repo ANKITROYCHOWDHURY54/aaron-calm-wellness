@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Heart, Users, Award, BookOpen, GraduationCap, Target, Zap, Globe, Coffee, Dumbbell, Brain, Leaf } from "lucide-react";
 import aaronPortrait from "@/assets/aaron-portrait.jpg";
+import ownerImage from "@/assets/Owner.jpeg";
 import { useInView } from "@/hooks/useInView";
 
 const AboutPreview = () => {
@@ -22,7 +23,7 @@ const AboutPreview = () => {
             <div className="p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/30),transparent,theme(colors.primary/30))]">
               <div className="relative overflow-hidden rounded-[15px] shadow-floating ring-1 ring-white/10 transition-all duration-300 ease-out group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6),0_0_0_1px_rgba(0,0,0,0.1)] group-hover:scale-[1.02] group-hover:-translate-y-2">
               <img
-                src={"https://media.licdn.com/dms/image/v2/D5622AQE1A9iEb6hd6Q/feedshare-shrink_1280/feedshare-shrink_1280/0/1704800727637?e=1761177600&v=beta&t=y8p8VkRFS954yZ3wYqFfTk0uHS_bwKquxnJz2IXGeyA"}
+                src={ownerImage}
                 alt="Aaron S. Murray - Holistic Health Coach"
                 className="w-full h-[280px] sm:h-[360px] md:h-[480px] lg:h-[600px] object-cover"
               />

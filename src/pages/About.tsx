@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Users, Award, Target, Compass, Leaf } from "lucide-react";
-import aaronPortrait from "@/assets/aaron-portrait.jpg";
+import ownerImage from "@/assets/Owner.jpeg";
 import { useInView } from "@/hooks/useInView";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useEffect, useRef, useState } from "react";
@@ -126,7 +126,7 @@ const About = () => {
             <div className={`relative transition-all duration-1000 ${bioInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: bioInView ? '220ms' : undefined }}>
               <div ref={portraitRef} className="relative overflow-hidden rounded-2xl shadow-floating ring-1 ring-border/50 group [transform-style:preserve-3d] transition-transform duration-300 ease-out">
                 <img
-                  src={"https://media.licdn.com/dms/image/v2/D5622AQE1A9iEb6hd6Q/feedshare-shrink_1280/feedshare-shrink_1280/0/1704800727637?e=1761177600&v=beta&t=y8p8VkRFS954yZ3wYqFfTk0uHS_bwKquxnJz2IXGeyA"}
+                  src={ownerImage}
                   alt="Aaron S. Murray"
                   className="w-full h-[360px] sm:h-[480px] lg:h-[600px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06] group-hover:translate-y-[-3px]"
                 />
