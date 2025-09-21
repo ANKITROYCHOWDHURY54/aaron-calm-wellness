@@ -580,7 +580,7 @@ const Index = () => {
                     </Badge>
                   </div>
 
-                  <Card className="group relative transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl border-border/50 hover:border-primary/30 overflow-hidden mt-6 ring-2 ring-accent/20">
+                  <Card className="group relative transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl overflow-hidden mt-6">
                     <div className="relative h-72">
                       <img
                         src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop"
