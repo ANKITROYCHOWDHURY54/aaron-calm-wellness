@@ -179,7 +179,7 @@ const Index = () => {
                   rating: 4.9,
                   image: onlineCoursesImg,
                   description: "Transform your approach to wellness with this comprehensive program covering mindful movement, breathwork, nutrition, and stress management.",
-                  features: ["8 comprehensive modules", "48 video lessons", "Workbook & resources", "Community access", "30-day money-back guarantee"],
+                  features: ["8 comprehensive modules", "48 video lessons", "Workbook & resources", "Community access"],
                   popular: true,
                   badge: "Most Popular",
                   badgeColor: "from-primary to-accent"
@@ -280,7 +280,7 @@ const Index = () => {
 
                   <Card
                     className={`group relative transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-2xl border-border/50 hover:border-primary/30 overflow-hidden ${
-                      course.popular ? 'ring-2 ring-primary shadow-floating sm:scale-105 mt-6 sm:mt-8' :
+                      course.popular ? 'shadow-floating' :
                       course.rating >= 4.9 ? 'ring-1 ring-yellow-400/30 shadow-lg' : ''
                     }`}
                     style={{ transitionDelay: `${400 + index * 100}ms` }}
@@ -327,7 +327,7 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <CardContent className="p-3 sm:p-4 md:p-6 lg:p-8 relative">
+                    <CardContent className="p-3 sm:p-4 md:p-6 lg:p-8 relative h-80 sm:h-96 md:h-[28rem] lg:h-[32rem] flex flex-col">
                       {/* Background gradient */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -418,7 +418,7 @@ const Index = () => {
                         
                         {/* CTA Button */}
                         <Button 
-                          className={`w-full group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300 text-xs sm:text-sm md:text-base ${
+                          className={`w-full group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300 text-xs sm:text-sm md:text-base mt-auto ${
                             course.popular ? 'btn-hero' : 'btn-outline'
                           }`}
                           size="sm"
@@ -513,7 +513,7 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <CardContent className="p-4 sm:p-6 lg:p-8 relative">
+                    <CardContent className="p-4 sm:p-6 lg:p-8 relative h-96 sm:h-[28rem] md:h-[32rem] lg:h-[36rem] flex flex-col">
                       {/* Background gradient */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -560,7 +560,7 @@ const Index = () => {
                           </ul>
                         </div>
 
-                        <Button className="w-full btn-hero group-hover:scale-105 transition-all duration-300" size="lg">
+                        <Button className="w-full btn-hero group-hover:scale-105 transition-all duration-300 mt-auto" size="lg">
                           Get Foundation Bundle
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         </Button>
@@ -605,7 +605,7 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <CardContent className="p-4 sm:p-6 lg:p-8 relative">
+                    <CardContent className="p-4 sm:p-6 lg:p-8 relative h-96 sm:h-[28rem] md:h-[32rem] lg:h-[36rem] flex flex-col">
                       {/* Background gradient */}
                       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -653,7 +653,7 @@ const Index = () => {
                           </ul>
                         </div>
 
-                        <Button className="w-full bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-white group-hover:scale-105 transition-all duration-300" size="lg">
+                        <Button className="w-full bg-gradient-to-r from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-white group-hover:scale-105 transition-all duration-300 mt-auto" size="lg">
                           Get Complete Bundle
                           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         </Button>
