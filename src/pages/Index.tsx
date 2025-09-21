@@ -614,7 +614,7 @@ const Index = () => {
                         <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-gradient-to-r from-accent/5 to-primary/5 rounded-xl sm:rounded-2xl border border-accent/20">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs sm:text-sm text-muted-foreground">Individual Price</span>
-                            <span className="font-medium text-base sm:text-lg line-through">$412</span>
+                            <span className="font-medium text-base sm:text-lg line-through">$365</span>
                           </div>
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs sm:text-sm font-semibold text-foreground">Bundle Price</span>
@@ -622,7 +622,7 @@ const Index = () => {
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-xs sm:text-sm text-muted-foreground">You Save</span>
-                            <span className="font-bold text-green-600 text-base sm:text-lg">$165 (40%)</span>
+                            <span className="font-bold text-green-600 text-base sm:text-lg">$118 (32%)</span>
                           </div>
                         </div>
 
@@ -636,8 +636,7 @@ const Index = () => {
                             {[
                               { name: "Foundations of Holistic Wellness", price: "$197" },
                               { name: "Mobility Mastery", price: "$89" },
-                              { name: "Mindful Eating Mastery", price: "$79" },
-                              { name: "Stress Management Toolkit", price: "$59" }
+                              { name: "Mindful Eating Mastery", price: "$79" }
                             ].map((course, index) => (
                               <li
                                 key={course.name}
