@@ -116,7 +116,7 @@ const Navbar = ({ isSinglePage = false }: NavbarProps) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-navbar-slide-down ${
         isHome
           ? (isScrolled 
               ? "glass shadow-card border-b border-white/20" 
@@ -130,29 +130,30 @@ const Navbar = ({ isSinglePage = false }: NavbarProps) => {
           <Link 
             to={isSinglePage ? "#home" : "/"} 
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center space-x-2 group"
+            className="flex items-center space-x-2 group logo-container"
           >
-            <div className="p-2 rounded-full bg-primary/20 group-hover:bg-primary/30 transition-colors">
-              <Leaf className="h-6 w-6 text-primary" />
+            <div className="p-2 rounded-full bg-primary/20 group-hover:bg-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
+              <Leaf className="h-6 w-6 text-primary logo-icon animate-logo-float" />
             </div>
-            <div>
-              <h1 className="font-semibold text-lg text-foreground">Aaron S. Murray</h1>
-              <p className="text-sm text-muted-foreground">Holistic Health Coach</p>
+            <div className="group-hover:translate-x-1 transition-transform duration-300">
+              <h1 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors duration-300">Aaron S. Murray</h1>
+              <p className="text-sm text-muted-foreground group-hover:text-primary/80 transition-colors duration-300">Holistic Health Coach</p>
             </div>
           </Link>
 
           {/* Desktop Navigation (show on large screens and up) */}
             <div className="hidden lg:flex items-center space-x-2">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <Link
                   key={link.href}
                   to={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                  className={`px-4 py-2 rounded-lg text-sm font-medium nav-link-hover animate-nav-link ${
                     isActive(link.href) 
-                      ? "bg-primary text-primary-foreground shadow-md" 
+                      ? "bg-primary text-primary-foreground shadow-md animate-pulse-glow" 
                       : "bg-background/80 text-foreground hover:bg-primary/10 hover:text-primary border border-border/50 hover:border-primary/30"
                   }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {link.label}
                 </Link>
@@ -160,13 +161,14 @@ const Navbar = ({ isSinglePage = false }: NavbarProps) => {
             </div>
 
           {/* CTA Button */}
-          <div className="hidden lg:block">
+          <div className="hidden lg:block animate-nav-link" style={{ animationDelay: '800ms' }}>
             <Link 
               to={isSinglePage ? "#retreats" : "/retreats"}
               onClick={(e) => handleNavClick(e, "#retreats")}
             >
-              <Button variant="default" className="btn-hero">
-                Book a Retreat
+              <Button variant="default" className="btn-hero group relative overflow-hidden animate-shimmer">
+                <span className="relative z-10">Book a Retreat</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </Button>
             </Link>
           </div>
@@ -174,37 +176,39 @@ const Navbar = ({ isSinglePage = false }: NavbarProps) => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-all duration-300 hover:scale-110 hover:rotate-12 group"
           >
             {isOpen ? (
-              <X className="h-6 w-6 text-foreground" />
+              <X className="h-6 w-6 text-foreground group-hover:text-primary transition-colors duration-300" />
             ) : (
-              <Menu className="h-6 w-6 text-foreground" />
+              <Menu className="h-6 w-6 text-foreground group-hover:text-primary transition-colors duration-300" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden mt-4 py-4 border-t border-border">
+          <div className="lg:hidden mt-4 py-4 border-t border-border animate-mobile-menu">
             <div className="flex flex-col space-y-3">
-              {navLinks.map((link) => (
+              {navLinks.map((link, index) => (
                 <Link
                   key={link.href}
                   to={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  className={`px-4 py-3 rounded-lg text-sm font-medium nav-link-hover animate-nav-link ${
                     isActive(link.href) 
-                      ? "bg-primary text-primary-foreground shadow-md" 
+                      ? "bg-primary text-primary-foreground shadow-md animate-pulse-glow" 
                       : "bg-background/80 text-foreground hover:bg-primary/10 hover:text-primary border border-border/50 hover:border-primary/30"
                   }`}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {link.label}
                 </Link>
               ))}
               <Link to={isSinglePage ? "#retreats" : "/retreats"} onClick={(e) => handleNavClick(e, "#retreats")}>
-                <Button variant="default" className="btn-hero w-full mt-2">
-                  Book a Retreat
+                <Button variant="default" className="btn-hero w-full mt-2 group relative overflow-hidden animate-shimmer">
+                  <span className="relative z-10">Book a Retreat</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </Button>
               </Link>
             </div>

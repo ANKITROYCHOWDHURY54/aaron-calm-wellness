@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;500;600&family=Merriweather+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -65,8 +65,80 @@ html {
     --shadow-card: 0 8px 30px hsl(26 29% 32% / 0.12);
     --shadow-floating: 0 20px 60px hsl(26 29% 32% / 0.15);
 
-    /* Typography Scale */
-    --font-primary: 'Poppins', system-ui, sans-serif;
+    /* Typography Scale - Aaron S. Murray Design System */
+    --font-heading: 'Quicksand', system-ui, sans-serif;
+    --font-body: 'Nunito', system-ui, sans-serif;
+    --font-accent: 'Merriweather Sans', system-ui, sans-serif;
+    
+    /* Typography Scale Variables */
+    /* H1 - Hero Title */
+    --text-h1-size: 4rem; /* 64px */
+    --text-h1-size-mobile: 2.5rem; /* 40px */
+    --text-h1-weight: 700;
+    --text-h1-line-height: 1.2;
+    --text-h1-font: var(--font-heading);
+    
+    /* H2 - Section Titles */
+    --text-h2-size: 2.25rem; /* 36px */
+    --text-h2-size-mobile: 1.75rem; /* 28px */
+    --text-h2-weight: 600;
+    --text-h2-line-height: 1.3;
+    --text-h2-font: var(--font-heading);
+    
+    /* H3 - Subsection / Service Titles */
+    --text-h3-size: 1.5rem; /* 24px */
+    --text-h3-weight: 600;
+    --text-h3-line-height: 1.4;
+    --text-h3-font: var(--font-heading);
+    
+    /* Body Large */
+    --text-body-large-size: 1.125rem; /* 18px */
+    --text-body-large-weight: 400;
+    --text-body-large-line-height: 1.6;
+    --text-body-large-font: var(--font-body);
+    
+    /* Body Small */
+    --text-body-size: 1rem; /* 16px */
+    --text-body-weight: 400;
+    --text-body-line-height: 1.6;
+    --text-body-font: var(--font-body);
+    
+    /* Lists & Captions */
+    --text-caption-size: 0.875rem; /* 14px */
+    --text-caption-weight: 400;
+    --text-caption-line-height: 1.5;
+    --text-caption-font: var(--font-body);
+    
+    /* Blockquotes / Quotes */
+    --text-quote-size: 1.25rem; /* 20px */
+    --text-quote-weight: 500;
+    --text-quote-line-height: 1.5;
+    --text-quote-font: var(--font-accent);
+    --text-quote-style: italic;
+    
+    /* Metadata */
+    --text-meta-size: 0.875rem; /* 14px */
+    --text-meta-weight: 400;
+    --text-meta-line-height: 1.4;
+    --text-meta-font: var(--font-accent);
+    
+    /* Form Labels / Small UI Elements */
+    --text-label-size: 0.9375rem; /* 15px */
+    --text-label-weight: 500;
+    --text-label-line-height: 1.4;
+    --text-label-font: var(--font-accent);
+    
+    /* Primary Buttons */
+    --text-button-primary-size: 1rem; /* 16px */
+    --text-button-primary-weight: 600;
+    --text-button-primary-letter-spacing: 0.5px;
+    --text-button-primary-font: var(--font-heading);
+    
+    /* Secondary Buttons / Links */
+    --text-button-secondary-size: 0.9375rem; /* 15px */
+    --text-button-secondary-weight: 500;
+    --text-button-secondary-letter-spacing: 0.3px;
+    --text-button-secondary-font: var(--font-heading);
     
     /* Animation Timings */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -135,7 +207,7 @@ html {
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-primary);
+    font-family: var(--font-body);
     font-feature-settings: 'cv03', 'cv04', 'cv11';
   }
 
@@ -166,8 +238,162 @@ html {
     animation: fadeIn 0.8s ease-out forwards;
   }
 
+  .animate-blog-card {
+    animation: blogCardIn 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+@keyframes blogCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navbar Animations */
+@keyframes navbarSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(2deg);
+  }
+}
+
+@keyframes navLinkSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobileMenuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(var(--primary), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(var(--primary), 0.6), 0 0 30px rgba(var(--primary), 0.4);
+  }
+}
+
   .animate-slide-up {
     animation: slideUp 0.8s ease-out forwards;
+  }
+
+  /* Navbar Animation Classes */
+  .animate-navbar-slide-down {
+    animation: navbarSlideDown 0.6s ease-out forwards;
+  }
+
+  .animate-logo-float {
+    animation: logoFloat 3s ease-in-out infinite;
+  }
+
+  .animate-nav-link {
+    animation: navLinkSlide 0.5s ease-out forwards;
+  }
+
+  .animate-mobile-menu {
+    animation: mobileMenuSlide 0.3s ease-out forwards;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  /* Navbar Hover Effects */
+  .nav-link-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-link-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .nav-link-hover:hover::before {
+    left: 100%;
+  }
+
+  .nav-link-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Logo Animation */
+  .logo-container {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .logo-container:hover {
+    transform: scale(1.05) rotate(2deg);
+  }
+
+  .logo-container:hover .logo-icon {
+    animation: logoFloat 1s ease-in-out infinite;
+  }
+
+  /* Mobile Menu Animation */
+  .mobile-menu-enter {
+    animation: mobileMenuSlide 0.3s ease-out forwards;
+  }
+
+  .mobile-menu-exit {
+    animation: mobileMenuSlide 0.2s ease-in reverse;
   }
 
   .animate-scale-in {
@@ -256,19 +482,22 @@ html {
   .btn-hero {
     @apply bg-gradient-to-r from-primary to-primary-light text-primary-foreground 
            hover:from-primary-light hover:to-primary shadow-soft hover:shadow-card
-           transition-all duration-300 font-medium;
+           transition-all duration-300;
+    @apply text-button-primary;
   }
 
   .btn-secondary {
     @apply bg-gradient-to-r from-secondary to-secondary-light text-secondary-foreground 
            hover:from-secondary-light hover:to-secondary shadow-soft hover:shadow-card
-           transition-all duration-300 font-medium;
+           transition-all duration-300;
+    @apply text-button-secondary;
   }
 
   .btn-outline {
     @apply border-2 border-primary text-primary bg-transparent 
            hover:bg-primary hover:text-primary-foreground
-           transition-all duration-300 font-medium;
+           transition-all duration-300;
+    @apply text-button-primary;
   }
 
   /* Glass Effects */
@@ -277,6 +506,219 @@ html {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
+
+  /* Typography Utility Classes - Aaron S. Murray Design System */
+  /*
+   * Usage Examples:
+   * 
+   * Headings:
+   * <h1 class="text-h1">Hero Title</h1>
+   * <h2 class="text-h2">Section Title</h2>
+   * <h3 class="text-h3">Subsection Title</h3>
+   * 
+   * Body Text:
+   * <p class="text-body-large">Large body text</p>
+   * <p class="text-body">Regular body text</p>
+   * <small class="text-caption">Caption text</small>
+   * 
+   * Accent Text:
+   * <blockquote class="text-quote">Quote text</blockquote>
+   * <span class="text-meta">Metadata</span>
+   * <label class="text-label">Form label</label>
+   * 
+   * Buttons:
+   * <button class="btn-hero text-button-primary">Primary Button</button>
+   * <button class="btn-secondary text-button-secondary">Secondary Button</button>
+   * 
+   * Responsive Typography:
+   * H1 and H2 automatically adjust size on mobile (768px breakpoint)
+   * 
+   * Font Families:
+   * - Quicksand: Headings and buttons (approachable, rounded)
+   * - Nunito: Body text (clean, readable)
+   * - Merriweather Sans: Accent text (grounding, subtle contrast)
+   */
+  
+  /* Headings - Quicksand */
+  .text-h1 {
+    font-family: var(--text-h1-font);
+    font-size: var(--text-h1-size-mobile);
+    font-weight: var(--text-h1-weight);
+    line-height: var(--text-h1-line-height);
+  }
+  
+  @media (min-width: 768px) {
+    .text-h1 {
+      font-size: var(--text-h1-size);
+    }
+  }
+  
+  .text-h2 {
+    font-family: var(--text-h2-font);
+    font-size: var(--text-h2-size-mobile);
+    font-weight: var(--text-h2-weight);
+    line-height: var(--text-h2-line-height);
+  }
+  
+  @media (min-width: 768px) {
+    .text-h2 {
+      font-size: var(--text-h2-size);
+    }
+  }
+  
+  .text-h3 {
+    font-family: var(--text-h3-font);
+    font-size: var(--text-h3-size);
+    font-weight: var(--text-h3-weight);
+    line-height: var(--text-h3-line-height);
+  }
+  
+  /* Body Text - Nunito */
+  .text-body-large {
+    font-family: var(--text-body-large-font);
+    font-size: var(--text-body-large-size);
+    font-weight: var(--text-body-large-weight);
+    line-height: var(--text-body-large-line-height);
+  }
+  
+  .text-body {
+    font-family: var(--text-body-font);
+    font-size: var(--text-body-size);
+    font-weight: var(--text-body-weight);
+    line-height: var(--text-body-line-height);
+  }
+  
+  .text-caption {
+    font-family: var(--text-caption-font);
+    font-size: var(--text-caption-size);
+    font-weight: var(--text-caption-weight);
+    line-height: var(--text-caption-line-height);
+  }
+  
+  /* Accent Text - Merriweather Sans */
+  .text-quote {
+    font-family: var(--text-quote-font);
+    font-size: var(--text-quote-size);
+    font-weight: var(--text-quote-weight);
+    line-height: var(--text-quote-line-height);
+    font-style: var(--text-quote-style);
+  }
+  
+  .text-meta {
+    font-family: var(--text-meta-font);
+    font-size: var(--text-meta-size);
+    font-weight: var(--text-meta-weight);
+    line-height: var(--text-meta-line-height);
+  }
+  
+  .text-label {
+    font-family: var(--text-label-font);
+    font-size: var(--text-label-size);
+    font-weight: var(--text-label-weight);
+    line-height: var(--text-label-line-height);
+  }
+  
+  /* Buttons - Quicksand */
+  .text-button-primary {
+    font-family: var(--text-button-primary-font);
+    font-size: var(--text-button-primary-size);
+    font-weight: var(--text-button-primary-weight);
+    letter-spacing: var(--text-button-primary-letter-spacing);
+  }
+  
+  .text-button-secondary {
+    font-family: var(--text-button-secondary-font);
+    font-size: var(--text-button-secondary-size);
+    font-weight: var(--text-button-secondary-weight);
+    letter-spacing: var(--text-button-secondary-letter-spacing);
+  }
+  
+  /* Additional Typography Utilities */
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-left {
+    text-align: left;
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  /* Font Weight Utilities */
+  .font-light { font-weight: 300; }
+  .font-normal { font-weight: 400; }
+  .font-medium { font-weight: 500; }
+  .font-semibold { font-weight: 600; }
+  .font-bold { font-weight: 700; }
+  
+  /* Letter Spacing Utilities */
+  .tracking-tight { letter-spacing: -0.025em; }
+  .tracking-normal { letter-spacing: 0em; }
+  .tracking-wide { letter-spacing: 0.025em; }
+  .tracking-wider { letter-spacing: 0.05em; }
+  .tracking-widest { letter-spacing: 0.1em; }
+  
+  /* Semantic HTML Element Styles */
+  h1 {
+    @apply text-h1;
+  }
+  
+  h2 {
+    @apply text-h2;
+  }
+  
+  h3 {
+    @apply text-h3;
+  }
+  
+  p {
+    @apply text-body;
+  }
+  
+  blockquote {
+    @apply text-quote;
+  }
+  
+  small, .text-sm {
+    @apply text-caption;
+  }
+  
+  label {
+    @apply text-label;
+  }
+  
+  /* Additional Typography Helpers */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .text-nowrap {
+    white-space: nowrap;
+  }
+  
+  .text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* Line Height Utilities */
+  .leading-none { line-height: 1; }
+  .leading-tight { line-height: 1.25; }
+  .leading-snug { line-height: 1.375; }
+  .leading-normal { line-height: 1.5; }
+  .leading-relaxed { line-height: 1.625; }
+  .leading-loose { line-height: 2; }
 }
 
 @keyframes fadeIn {

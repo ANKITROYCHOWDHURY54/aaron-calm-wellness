@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useInView } from "@/hooks/useInView";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -138,23 +138,7 @@ const Blog = () => {
   const { ref: postsRef, inView: postsInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
   const { ref: newsletterRef, inView: newsletterInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
   
-  // Individual blog post animations
-  const { ref: post1Ref, inView: post1InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
-  const { ref: post2Ref, inView: post2InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
-  const { ref: post3Ref, inView: post3InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
-  const { ref: post4Ref, inView: post4InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
-  const { ref: post5Ref, inView: post5InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
-  const { ref: post6Ref, inView: post6InView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
-
-  // Function to get blog post animation state
-  const getPostAnimation = (index: number) => {
-    const postRefs = [post1Ref, post2Ref, post3Ref, post4Ref, post5Ref, post6Ref];
-    const postInViews = [post1InView, post2InView, post3InView, post4InView, post5InView, post6InView];
-    return {
-      ref: postRefs[index],
-      inView: postInViews[index]
-    };
-  };
+  // Simplified approach - use main section animation with CSS-based staggering
 
   return (
     <div ref={pageRef} className="min-h-screen bg-background pt-16 md:pt-[76px]">
@@ -187,6 +171,22 @@ const Blog = () => {
               Practical wisdom, evidence-based insights, and real-world strategies 
               to support your wellness journey and help you thrive in daily life.
             </p>
+            
+            {/* Additional animated elements */}
+            <div className={`flex flex-wrap justify-center gap-4 mt-8 sm:mt-10 transition-all duration-1000 ${heroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: heroInView ? '200ms' : undefined }}>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+                <BookOpen className="h-4 w-4" />
+                <span className="text-sm font-medium">24 Articles</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+                <Heart className="h-4 w-4" />
+                <span className="text-sm font-medium">Weekly Updates</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+                <Leaf className="h-4 w-4" />
+                <span className="text-sm font-medium">Evidence-Based</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -195,33 +195,50 @@ const Blog = () => {
       <section ref={searchRef} className="py-12 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
+            {/* Section Title */}
+            <div className={`text-center mb-8 transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Find Your Perfect Article</h2>
+              <p className="text-muted-foreground">Search through our collection of wellness insights</p>
+            </div>
+
             {/* Search Bar */}
-            <div className={`relative mb-8 transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <div className={`relative mb-8 transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: searchInView ? '100ms' : undefined }}>
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground transition-colors duration-300" />
               <Input
                 type="text"
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-12 text-lg focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="pl-10 h-12 text-lg focus-visible:ring-2 focus-visible:ring-primary/40 transition-all duration-300 hover:shadow-md"
               />
             </div>
 
             {/* Category Filter */}
             <div className={`flex flex-wrap gap-3 justify-center transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: searchInView ? '200ms' : undefined }}>
-              {categories.map((category) => (
+              {categories.map((category, index) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ring-1 hover:-translate-y-0.5 ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ring-1 hover:-translate-y-0.5 hover:shadow-md ${
                     selectedCategory === category.id
                       ? "bg-primary text-white ring-primary/50 shadow-sm"
                       : "bg-muted hover:bg-muted/80 ring-border"
                   }`}
+                  style={{ 
+                    transitionDelay: searchInView ? `${300 + (index * 50)}ms` : undefined,
+                    transition: 'all 0.3s ease-out'
+                  }}
                 >
                   {category.name} ({category.count})
                 </button>
               ))}
+            </div>
+
+            {/* Results Counter */}
+            <div className={`text-center mt-6 transition-all duration-1000 ${searchInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: searchInView ? '400ms' : undefined }}>
+              <p className="text-sm text-muted-foreground">
+                Showing {filteredPosts.length} of {blogPosts.length} articles
+              </p>
             </div>
           </div>
         </div>
@@ -232,35 +249,48 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className={`text-center mb-12 transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h2 className="text-3xl font-bold mb-4">Featured Article</h2>
+              <Badge variant="outline" className="mb-4 bg-primary/10 text-primary border-primary/20">
+                Editor's Choice
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Article</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Our most popular and impactful article this month
+              </p>
             </div>
             
             <div className={`p-[1px] rounded-2xl bg-[linear-gradient(120deg,theme(colors.primary/25),transparent,theme(colors.accent/25))] transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: featuredInView ? '200ms' : undefined }}>
-              <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl">
+              <Card className="overflow-hidden rounded-[15px] shadow-floating border-0 bg-gradient-to-br from-white to-muted/20 transition-all duration-500 hover:shadow-2xl group">
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image */}
-                <div className="relative h-64 lg:h-full min-h-[400px]">
+                <div className={`relative h-64 lg:h-full min-h-[400px] transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: featuredInView ? '300ms' : undefined }}>
                   <img
                     src={featuredPost.image}
                     alt={featuredPost.title}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-primary/20 to-transparent lg:bg-gradient-to-r" />
                   
                   {/* Category Badge */}
-                  <div className="absolute top-6 left-6">
+                  <div className={`absolute top-6 left-6 transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: featuredInView ? '400ms' : undefined }}>
                     <Badge variant="secondary" className="bg-white/90 text-foreground capitalize ring-1 ring-border/50">
                       {featuredPost.category}
+                    </Badge>
+                  </div>
+
+                  {/* Featured Badge */}
+                  <div className={`absolute top-6 right-6 transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: featuredInView ? '500ms' : undefined }}>
+                    <Badge className="bg-primary text-white">
+                      Featured
                     </Badge>
                   </div>
                 </div>
 
                 {/* Content */}
-                <CardContent className="relative p-8 lg:p-12 flex flex-col justify-center">
+                <CardContent className={`relative p-8 lg:p-12 flex flex-col justify-center transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: featuredInView ? '400ms' : undefined }}>
                   <div className="pointer-events-none absolute inset-x-0 -top-1 h-20 bg-gradient-to-b from-white/25 to-transparent opacity-70" />
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                      <h3 className="text-3xl md:text-4xl font-bold mb-4 transition-colors group-hover:text-primary">
                         {featuredPost.title}
                       </h3>
                       <p className="text-lg text-muted-foreground leading-relaxed">
@@ -269,7 +299,7 @@ const Blog = () => {
                     </div>
 
                     {/* Meta Info */}
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                    <div className={`flex flex-wrap items-center gap-4 text-sm text-muted-foreground transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: featuredInView ? '500ms' : undefined }}>
                       <div className="flex items-center space-x-2">
                         <User className="h-4 w-4" />
                         <span>{featuredPost.author}</span>
@@ -285,7 +315,7 @@ const Blog = () => {
                     </div>
 
                     {/* CTA */}
-                    <div>
+                    <div className={`transition-all duration-1000 ${featuredInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: featuredInView ? '600ms' : undefined }}>
                       <Button size="lg" className="btn-hero group relative overflow-hidden">
                         Read Full Article
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -306,6 +336,9 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className={`text-center mb-16 transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <Badge variant="outline" className="mb-4 bg-accent/10 text-accent border-accent/20">
+                Latest Content
+              </Badge>
               <h2 className="text-4xl font-bold mb-6">Latest Articles</h2>
               <p className="text-xl text-muted-foreground">
                 {filteredPosts.length} article{filteredPosts.length !== 1 ? 's' : ''} found
@@ -315,27 +348,49 @@ const Blog = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((post, index) => {
                 const CategoryIcon = getCategoryIcon(post.category);
-                const { ref: postRef, inView: postInView } = getPostAnimation(index);
                 return (
-                  <Card key={post.id} ref={postRef} className={`group overflow-hidden ring-1 ring-border/50 transition-all duration-700 ease-out ${postInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} hover:-translate-y-1 hover:shadow-2xl`}>
-                    <div className="relative h-48">
+                  <div
+                    key={post.id}
+                    style={{ 
+                      opacity: 0,
+                      transform: 'translateY(30px)',
+                      animation: `fadeIn 0.8s ease-out forwards`,
+                      animationDelay: `${index * 200}ms`,
+                      animationFillMode: 'both'
+                    }}
+                  >
+                    <Card className="group overflow-hidden ring-1 ring-border/50 transition-all duration-700 ease-out hover:-translate-y-1 hover:shadow-2xl">
+                    <div className="relative h-48 overflow-hidden">
                       <img
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent" />
+                      
+                      {/* Category Badge */}
                       <div className="absolute top-4 left-4">
                         <div className="flex items-center space-x-2 bg-white/90 rounded-full px-3 py-1 ring-1 ring-border/50 shadow-sm">
                           <CategoryIcon className="h-4 w-4 text-primary" />
                           <span className="text-sm font-medium capitalize">{post.category}</span>
                         </div>
                       </div>
+
+                      {/* Read Time Badge */}
+                      <div className="absolute top-4 right-4">
+                        <div className="bg-black/20 backdrop-blur-sm rounded-full px-3 py-1">
+                          <span className="text-xs font-medium text-white">{post.readTime}</span>
+                        </div>
+                      </div>
                     </div>
                     
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-3 line-clamp-2 transition-colors group-hover:text-primary">{post.title}</h3>
-                      <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
+                      <h3 className="text-xl font-semibold mb-3 line-clamp-2 transition-colors group-hover:text-primary">
+                        {post.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
                       
                       <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                         <div className="flex items-center space-x-2">
@@ -343,8 +398,8 @@ const Blog = () => {
                           <span>{post.date}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <Clock className="h-4 w-4" />
-                          <span>{post.readTime}</span>
+                          <User className="h-4 w-4" />
+                          <span>{post.author}</span>
                         </div>
                       </div>
                       
@@ -352,37 +407,42 @@ const Blog = () => {
                         Read Article
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  </div>
+                );
+              })}
             </div>
 
             {filteredPosts.length === 0 && (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-semibold mb-2">No articles found</h3>
-                <p className="text-muted-foreground mb-6">
+              <div className={`text-center py-12 transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                <div className={`text-6xl mb-4 transition-all duration-1000 ${postsInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`} style={{ transitionDelay: postsInView ? '200ms' : undefined }}>🔍</div>
+                <h3 className={`text-2xl font-semibold mb-2 transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: postsInView ? '300ms' : undefined }}>No articles found</h3>
+                <p className={`text-muted-foreground mb-6 transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: postsInView ? '400ms' : undefined }}>
                   Try adjusting your search terms or selected category.
                 </p>
-                <Button 
-                  onClick={() => {
-                    setSearchTerm("");
-                    setSelectedCategory("all");
-                  }}
-                  className="btn-outline"
-                >
-                  Clear Filters
-                </Button>
+                <div className={`transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: postsInView ? '500ms' : undefined }}>
+                  <Button 
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedCategory("all");
+                    }}
+                    className="btn-outline"
+                  >
+                    Clear Filters
+                  </Button>
+                </div>
               </div>
             )}
 
             {/* Load More */}
             {filteredPosts.length > 0 && (
-              <div className="text-center mt-12">
-                <Button size="lg" variant="outline" className="btn-outline">
+              <div className={`text-center mt-12 transition-all duration-1000 ${postsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: postsInView ? '800ms' : undefined }}>
+                <Button size="lg" variant="outline" className="btn-outline group relative overflow-hidden">
                   Load More Articles
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent" />
                 </Button>
               </div>
             )}
@@ -397,25 +457,55 @@ const Blog = () => {
             <Card className={`shadow-floating border border-white/20 bg-gradient-to-br from-primary/5 to-accent/5 overflow-hidden transition-all duration-1000 ${newsletterInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <CardContent className="relative p-8 md:p-12 text-center">
                 <div className="pointer-events-none absolute inset-x-0 -top-1 h-20 bg-gradient-to-b from-white/25 to-transparent opacity-70" />
-                <h3 className="text-3xl font-bold mb-4">Never Miss an Article</h3>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Get the latest wellness insights and practical tips delivered 
-                  directly to your inbox every week.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                
+                {/* Header Section */}
+                <div className={`mb-8 transition-all duration-1000 ${newsletterInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: newsletterInView ? '100ms' : undefined }}>
+                  <Badge variant="outline" className="mb-4 bg-accent/10 text-accent border-accent/20">
+                    Stay Connected
+                  </Badge>
+                  <h3 className="text-3xl sm:text-4xl font-bold mb-4">Never Miss an Article</h3>
+                  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                    Get the latest wellness insights and practical tips delivered 
+                    directly to your inbox every week.
+                  </p>
+                </div>
+
+                {/* Form Section */}
+                <div className={`flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-6 transition-all duration-1000 ${newsletterInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: newsletterInView ? '200ms' : undefined }}>
                   <Input 
                     type="email" 
                     placeholder="Your email address"
-                    className="flex-1 h-12 focus-visible:ring-2 focus-visible:ring-primary/40"
+                    className="flex-1 h-12 focus-visible:ring-2 focus-visible:ring-primary/40 transition-all duration-300 hover:shadow-md"
                   />
                   <Button className="btn-hero relative overflow-hidden group">
                     Subscribe
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-white/10 via-white/20 to-transparent" />
                   </Button>
                 </div>
-                <p className="text-sm text-muted-foreground mt-4">
-                  Join 2,000+ readers. Unsubscribe anytime.
-                </p>
+
+                {/* Footer Info */}
+                <div className={`space-y-4 transition-all duration-1000 ${newsletterInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: newsletterInView ? '300ms' : undefined }}>
+                  <p className="text-sm text-muted-foreground">
+                    Join 2,000+ readers. Unsubscribe anytime.
+                  </p>
+                  
+                  {/* Trust Indicators */}
+                  <div className="flex flex-wrap justify-center gap-6 text-xs text-muted-foreground">
+                    <div className="flex items-center space-x-1">
+                      <Heart className="h-3 w-3" />
+                      <span>Weekly insights</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Leaf className="h-3 w-3" />
+                      <span>Evidence-based</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <BookOpen className="h-3 w-3" />
+                      <span>No spam</span>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>

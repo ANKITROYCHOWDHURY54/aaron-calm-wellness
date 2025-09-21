@@ -92,7 +92,8 @@ const Index = () => {
     }
   };
 
-  const { ref: coursesRef, inView: coursesInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px 0px -10% 0px", once: false });
+  const { ref: coursesRef, inView: coursesInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
+  const { ref: blogRef, inView: blogInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
   const { ref: contactRef, inView: contactInView } = useInView<HTMLDivElement>({ threshold: 0.1, margin: "0px", once: true });
 
   return (
@@ -120,7 +121,7 @@ const Index = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 sm:w-40 md:w-48 lg:w-56 xl:w-64 h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 bg-primary/5 rounded-full blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
           
           <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 relative z-10">
-            <div className="text-center mb-8 sm:mb-12 md:mb-16">
+            <div className={`text-center mb-8 sm:mb-12 md:mb-16 transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <Badge className="mb-4 sm:mb-6 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium bg-primary/10 text-primary border-primary/20">
                 <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                 Online Learning
@@ -135,7 +136,7 @@ const Index = () => {
             </div>
 
             {/* Course Categories */}
-            <div className="mb-6 sm:mb-8 md:mb-12">
+            <div className={`mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: coursesInView ? '200ms' : undefined }}>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 px-4 sm:px-6">
                 {[
                   { name: "All Courses", active: true, count: 6 },
@@ -264,7 +265,11 @@ const Index = () => {
                   badgeColor: "from-teal-500 to-cyan-500"
                 }
               ].map((course, index) => (
-                <div key={course.title} className="relative">
+                <div 
+                  key={course.title} 
+                  className={`relative transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                  style={{ transitionDelay: coursesInView ? `${400 + index * 150}ms` : undefined }}
+                >
                   {course.badge && (
                     <div className="absolute -top-2 sm:-top-3 left-1/2 transform -translate-x-1/2 z-20">
                       <Badge className={`bg-gradient-to-r ${course.badgeColor} text-white shadow-lg text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5`}>
@@ -432,7 +437,7 @@ const Index = () => {
             </div>
 
             {/* Course Statistics */}
-            <div className="mb-6 sm:mb-8 md:mb-12">
+            <div className={`mb-6 sm:mb-8 md:mb-12 transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: coursesInView ? '600ms' : undefined }}>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto px-4 sm:px-6">
                 {[
                   { icon: Users, value: "2,000+", label: "Students Enrolled", color: "from-blue-500 to-blue-600" },
@@ -444,8 +449,8 @@ const Index = () => {
                   return (
                     <div 
                       key={stat.label}
-                      className="text-center group hover:-translate-y-2 transition-all duration-300 ease-out"
-                      style={{ transitionDelay: `${600 + index * 100}ms` }}
+                      className={`text-center group hover:-translate-y-2 transition-all duration-300 ease-out ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                      style={{ transitionDelay: coursesInView ? `${700 + index * 150}ms` : undefined }}
                     >
                       <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 mx-auto mb-2 sm:mb-3 rounded-lg sm:rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                         <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-white group-hover:scale-110 transition-transform duration-300" />
@@ -459,7 +464,7 @@ const Index = () => {
             </div>
 
             {/* Enhanced Course Bundle Section */}
-            <div>
+            <div className={`transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: coursesInView ? '800ms' : undefined }}>
               <div className="text-center mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4">
                 <Badge className="mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-accent/10 text-accent border-accent/20">
                   <BookOpen className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5" />
@@ -476,7 +481,7 @@ const Index = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto px-2 sm:px-4">
                 {/* Beginner Bundle */}
-                <div className="relative">
+                <div className={`relative transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: coursesInView ? '1000ms' : undefined }}>
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
                     <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg text-xs px-3 py-1">
                       Best Value
@@ -568,7 +573,7 @@ const Index = () => {
                 </div>
 
                 {/* Advanced Bundle */}
-                <div className="relative">
+                <div className={`relative transition-all duration-1000 ${coursesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: coursesInView ? '1150ms' : undefined }}>
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
                     <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg text-xs px-3 py-1">
                       Premium
@@ -671,7 +676,7 @@ const Index = () => {
         </section>
 
         {/* Blog Section */}
-        <section id="blog" className="py-24 bg-gradient-to-br from-muted/20 via-background to-accent/5 relative overflow-hidden">
+        <section id="blog" ref={blogRef} className="py-24 bg-gradient-to-br from-muted/20 via-background to-accent/5 relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
           <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
@@ -680,7 +685,7 @@ const Index = () => {
 
           <div className="container mx-auto px-4 relative z-10">
             {/* Header */}
-            <div className="text-center mb-20">
+            <div className={`text-center mb-20 transition-all duration-1000 ${blogInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
               <Badge className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Wellness Blog
@@ -695,7 +700,7 @@ const Index = () => {
             </div>
 
             {/* Featured Post */}
-            <div className="mb-16">
+            <div className={`mb-16 transition-all duration-1000 ${blogInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: blogInView ? '200ms' : undefined }}>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 <div className="relative group">
                   <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl">
@@ -825,7 +830,14 @@ const Index = () => {
                   bgColor: "bg-teal-50 dark:bg-teal-950/20"
                 }
               ].map((post, index) => (
-                <Card key={index} className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-border/50 hover:border-primary/30 hover:-translate-y-2 ${post.bgColor}`}>
+                <Card 
+                  key={index} 
+                  className={`group overflow-hidden hover:shadow-2xl transition-all duration-500 border-border/50 hover:border-primary/30 hover:-translate-y-2 ${post.bgColor} ${blogInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                  style={{ 
+                    transitionDelay: blogInView ? `${400 + index * 150}ms` : undefined,
+                    transitionDuration: '1000ms'
+                  }}
+                >
                   <div className="relative h-56 overflow-hidden">
                     <img
                       src={post.image}
@@ -879,7 +891,7 @@ const Index = () => {
             </div>
 
             {/* Newsletter CTA */}
-            <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12 text-center border border-primary/20">
+            <div className={`bg-gradient-to-r from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12 text-center border border-primary/20 transition-all duration-1000 ${blogInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: blogInView ? '600ms' : undefined }}>
               <div className="max-w-2xl mx-auto">
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center ring-1 ring-primary/20 shadow-lg">
                   <Mail className="h-8 w-8 text-white" />
@@ -906,7 +918,7 @@ const Index = () => {
             </div>
 
             {/* View All Posts */}
-            <div className="text-center mt-16">
+            <div className={`text-center mt-16 transition-all duration-1000 ${blogInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: blogInView ? '800ms' : undefined }}>
               <Button variant="outline" className="btn-outline group px-8 py-3 text-lg">
                 View All Posts
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
